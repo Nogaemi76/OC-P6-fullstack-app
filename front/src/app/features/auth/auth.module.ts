@@ -35,6 +35,7 @@ const materialModules = [
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    ...materialModules
   ]
 })
 export class AuthModule { }
