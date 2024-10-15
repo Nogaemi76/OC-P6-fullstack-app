@@ -1,9 +1,18 @@
 .logo-width {
   width: 140px;
 }
-.background-white {
-  background-color: #fff;
-}
-.border-bottom-black {
-  border-bottom: 1px solid #000;
+// .background-white {
+//   background-color: #fff;
+// }
+// .border-bottom-black {
+//   border-bottom: 1px solid #000;
+// }
+
+
+.header {
+  mat-toolbar {
+    background-color: #fff;
+    border-bottom: 1px solid #000;
+    height: 94px;
+  }
 }
