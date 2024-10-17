@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UsersRoutingModule } from './users-routing.module';
-import { ProfileComponent } from './Components/profile/profile.component';
+
 import { SharedModule } from 'src/app/shared/shared.module';
+
+import { ProfileComponent } from './Components/profile/profile.component';
 
 const materialModules = []
 
