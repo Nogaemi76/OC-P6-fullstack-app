@@ -1,4 +1,48 @@
 <app-header></app-header>
-<p>
-  form works!
-</p>
+
+<div class="post-form" fxLayout="row" fxLayoutAlign="center center">
+  <button class="arrow" mat-icon-button routerLink="/posts">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <mat-card>
+    <mat-card-title>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <img src="/assets/logo_p6.png" alt="logo" class="logo-width" />
+        <h1>Créer un nouvel article</h1>
+      </div>
+    </mat-card-title>
+    <form>
+      <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+        <!-- <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Sélectionner un thème</mat-label>
+            <input matInput placeholder="Sélectionner un thème">
+          </mat-form-field>
+        </p> -->
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Sélectionner un thème</mat-label>
+            <mat-select name="food" placeholder="Sélectionner un thème">
+              <mat-option [value]="">
+                value
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Titre de l'article</mat-label>
+            <input matInput placeholder="Titre de l'article">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Contenu de l'article</mat-label>
+            <textarea matInput placeholder="Contenu de l'article"></textarea>
+          </mat-form-field>
+        </p>
+        <button mat-raised-button color="primary">Créer</button>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>
