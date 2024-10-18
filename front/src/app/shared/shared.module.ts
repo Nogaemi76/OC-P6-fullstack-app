@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { HeaderComponent } from './components/header/header.component';
 import { TopicCardComponent } from './components/topic-card/topic-card.component';
+import { RouterModule } from '@angular/router';
 
 
 const materialModules = [
@@ -23,6 +24,7 @@ const materialModules = [
     TopicCardComponent],
   imports: [
     CommonModule,
+    RouterModule,
     FlexLayoutModule,
     ...materialModules
   ],
