@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HeaderComponent } from './components/header/header.component';
 import { TopicCardComponent } from './components/topic-card/topic-card.component';
 import { RouterModule } from '@angular/router';
+import { PostCardComponent } from './components/post-card/post-card.component';
 
 
 const materialModules = [
@@ -21,7 +22,9 @@ const materialModules = [
 @NgModule({
   declarations: [
     HeaderComponent,
-    TopicCardComponent],
+    TopicCardComponent,
+    PostCardComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -30,7 +33,8 @@ const materialModules = [
   ],
   exports: [
     HeaderComponent,
-    TopicCardComponent
+    TopicCardComponent,
+    PostCardComponent
   ]
 })
 export class SharedModule { }

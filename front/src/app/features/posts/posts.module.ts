@@ -17,8 +17,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { DetailComponent } from './components/detail/detail.component';
 import { FormComponent } from './components/form/form.component';
 import { ListComponent } from './components/list/list.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 const materialModules = [
+  MatGridListModule,
   MatButtonModule,
   MatCardModule,
   MatFormFieldModule,
