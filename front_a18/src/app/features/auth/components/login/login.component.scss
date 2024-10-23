@@ -7,18 +7,18 @@
   align-items: center;
 
   .arrow-button {
-      position: absolute;
-      top: 0;
-      left: 30px;
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: fit-content;
+    height: fit-content;
+
+    .mat-icon {
+      font-size: 3rem;
       width: fit-content;
       height: fit-content;
-
-      .mat-icon {
-        font-size: 3rem;
-        width: fit-content;
-        height: fit-content;
-      }
     }
+  }
 
   .login-card {
     mat-card {
@@ -44,8 +44,4 @@
       }
     }
   }
-}
-
-.flex-center {
-
 }

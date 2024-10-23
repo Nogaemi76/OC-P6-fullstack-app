@@ -1,1 +1,42 @@
-<p>register works!</p>
+<app-header></app-header>
+
+<div class="register-container">
+  <button class="arrow-button" mat-icon-button routerLink="/">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div class="register-card">
+    <mat-card>
+      <mat-card-title>
+        <div>
+          <img src="/logo_p6.png" alt="logo" class="logo-width" />
+          <h1>Inscription</h1>
+        </div>
+      </mat-card-title>
+      <form>
+        <mat-card-content>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Nom d’utilisateur</mat-label>
+              <input matInput>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Adresse e-mail</mat-label>
+              <input matInput>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Mot de passe</mat-label>
+              <input matInput>
+            </mat-form-field>
+          </p>
+          <button mat-flat-button>S'inscrire</button>
+        </mat-card-content>
+      </form>
+    </mat-card>
+  </div>
+
+</div>
+
