@@ -1,1 +1,51 @@
-<p>post-create works!</p>
+<app-header></app-header>
+
+<div class="post-form-container">
+  <button class="arrow-button" mat-icon-button routerLink="/posts">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  <div class="post-create-card">
+    <mat-card>
+      <mat-card-title>
+        <div>
+          <img src="/logo_p6.png" alt="logo" class="logo-width" />
+          <h1>Créer un nouvel article</h1>
+        </div>
+      </mat-card-title>
+      <form>
+        <mat-card-content>
+          <!-- <p>
+              <mat-form-field appearance="outline">
+                <mat-label>Sélectionner un thème</mat-label>
+                <input matInput placeholder="Sélectionner un thème">
+              </mat-form-field>
+            </p> -->
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Sélectionner un thème</mat-label>
+              <mat-select name="food" placeholder="Sélectionner un thème">
+                <mat-option [value]="">
+                  value
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Titre de l'article</mat-label>
+              <input matInput placeholder="Titre de l'article">
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Contenu de l'article</mat-label>
+              <textarea matInput placeholder="Contenu de l'article"></textarea>
+            </mat-form-field>
+          </p>
+          <button mat-flat-button>Créer</button>
+        </mat-card-content>
+      </form>
+    </mat-card>
+  </div>
+</div>

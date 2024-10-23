@@ -1,0 +1,13 @@
+.post-list-buttons {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-list-container {
+  padding: 20px;
+
+  mat-grid-tile {
+    background: #F5F5F5;
+  }
+}
