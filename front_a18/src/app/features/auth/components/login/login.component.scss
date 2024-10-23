@@ -1,0 +1,51 @@
+.login-container {
+  height: calc(100% - 94px);
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .arrow-button {
+      position: absolute;
+      top: 0;
+      left: 30px;
+      width: fit-content;
+      height: fit-content;
+
+      .mat-icon {
+        font-size: 3rem;
+        width: fit-content;
+        height: fit-content;
+      }
+    }
+
+  .login-card {
+    mat-card {
+      max-width: 300px;
+      width: 100%;
+      box-shadow: none;
+      background-color: white;
+
+      mat-card-title, mat-card-content {
+          text-align: center;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .logo-width {
+        width: 225px;
+      }
+
+      mat-form-field {
+        width: 250px;
+      }
+    }
+  }
+}
+
+.flex-center {
+
+}

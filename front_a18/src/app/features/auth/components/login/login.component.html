@@ -1,3 +1,35 @@
 <app-header></app-header>
 
-<p>login works!</p>
+<div class="login-container">
+  <button class="arrow-button" mat-icon-button routerLink="/">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div class="login-card">
+    <mat-card>
+      <mat-card-title>
+        <div>
+          <img src="/logo_p6.png" alt="logo" class="logo-width" />
+          <h1>Se connecter</h1>
+        </div>
+      </mat-card-title>
+      <form>
+        <mat-card-content>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>E-mail ou nom d’utilisateur</mat-label>
+              <input matInput>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Mot de passe</mat-label>
+              <input matInput>
+            </mat-form-field>
+          </p>
+          <button mat-flat-button>Se connecter</button>
+        </mat-card-content>
+      </form>
+    </mat-card>
+  </div>
+</div>
+
