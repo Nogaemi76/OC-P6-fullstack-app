@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { Topic } from '../../../features/topics/interfaces/topic.interface';
 
 const materialModules = [
   MatButtonModule,
@@ -15,5 +16,7 @@ const materialModules = [
   styleUrl: './topic-card.component.scss'
 })
 export class TopicCardComponent {
+
+  @Input() topic!: Topic;
 
 }

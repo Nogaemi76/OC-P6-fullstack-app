@@ -8,6 +8,7 @@ import { HeaderComponent } from '../../../../shared/components/header/header.com
 import { TopicCardComponent } from '../../../../shared/components/topic-card/topic-card.component';
 import { Topic } from '../../interfaces/topic.interface';
 import { TopicService } from '../../services/topic.service';
+import { NgFor } from '@angular/common';
 
 const materialModules = [
   MatGridListModule,
@@ -19,6 +20,7 @@ const materialModules = [
   selector: 'app-topic-list',
   standalone: true,
   imports: [
+    NgFor,
     ...materialModules,
     HeaderComponent,
     TopicCardComponent

@@ -2,14 +2,11 @@
 
 <div class="topics">
   <mat-grid-list cols="2" rowHeight="200px" gutterSize="20px">
-    <mat-grid-tile>
-      <app-topic-card></app-topic-card>
+
+    <mat-grid-tile *ngFor="let topic of topics">
+      <app-topic-card [topic]="topic"></app-topic-card>
     </mat-grid-tile>
-    <mat-grid-tile>
-      <app-topic-card></app-topic-card>
-    </mat-grid-tile>
-    <mat-grid-tile>3</mat-grid-tile>
-    <mat-grid-tile>4</mat-grid-tile>
+
   </mat-grid-list>
 </div>
 
