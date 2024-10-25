@@ -12,30 +12,33 @@
           <h1>Inscription</h1>
         </div>
       </mat-card-title>
-      <form>
+      <form [formGroup]="registerForm" (ngSubmit)="handleSubmit()">
         <mat-card-content>
           <p>
             <mat-form-field appearance="outline">
               <mat-label>Nom d’utilisateur</mat-label>
-              <input matInput>
+              <input matInput type="text" formControlName="username">
             </mat-form-field>
           </p>
           <p>
             <mat-form-field appearance="outline">
               <mat-label>Adresse e-mail</mat-label>
-              <input matInput>
+              <input matInput type="email" formControlName="email">
             </mat-form-field>
           </p>
           <p>
             <mat-form-field appearance="outline">
               <mat-label>Mot de passe</mat-label>
-              <input matInput>
+              <input matInput type="password" formControlName="password">
             </mat-form-field>
           </p>
-          <button mat-flat-button>S'inscrire</button>
+          <button mat-flat-button type="submit" [disabled]="!registerForm.valid">S'inscrire</button>
         </mat-card-content>
       </form>
     </mat-card>
+    <!-- <p>{{registerForm.value.username}}</p>
+    <p>{{registerForm.value.email}}</p>
+    <p>{{registerForm.value.password}}</p> -->
   </div>
 
 </div>

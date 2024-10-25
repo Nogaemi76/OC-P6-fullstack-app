@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { RouterLink, RouterOutlet } from '@angular/router';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -26,7 +26,6 @@ const materialModules = [
   imports: [
     RouterLink,
     RouterOutlet,
-    FormsModule,
     ReactiveFormsModule,
     ...materialModules,
     HeaderComponent
@@ -35,5 +34,19 @@ const materialModules = [
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+
+  // TODO Change the regex
+  private passwordRegex: RegExp = /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/;
+
+  registerForm = new FormGroup({
+    username: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.pattern(this.passwordRegex)])
+  });
+
+  // TODO Submit with Register
+  handleSubmit() {
+    alert(this.registerForm.value.username + ' | ' + this.registerForm.value.email + ' | ' + this.registerForm.value.password);
+  }
 
 }
