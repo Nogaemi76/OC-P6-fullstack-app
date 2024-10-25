@@ -1,6 +1,22 @@
-<p>home works!</p>
+<div class="center">
+  <img src="/logo_p6.png" alt="logo" />
 
-<button routerLink="/user/profile">user profile</button>
+  <div>
+    <button mat-flat-button routerLink="auth/login">Se connecter</button>
+    <button mat-flat-button routerLink="auth/register">S'inscrire</button>
+  </div>
+  <div>
+    <button mat-flat-button color="primary" routerLink="topics">Topics</button>
+    <button mat-flat-button color="primary" routerLink="users/profile">User profile</button>
+  </div>
+  <div>
+    <button mat-flat-button color="primary" routerLink="posts">Posts</button>
+    <button mat-flat-button color="primary" routerLink="posts/create">Create a post</button>
+    <button mat-flat-button color="primary" routerLink="posts/detail/:id">Post - detail</button>
+  </div>
+</div>
+
+<!-- <button routerLink="/user/profile">user profile</button>
 
 <button routerLink="/posts">posts</button>
 
@@ -12,4 +28,4 @@
 
 <button routerLink="/auth/register">register</button>
 
-<button routerLink="/auth/login">login</button>
+<button routerLink="/auth/login">login</button> -->
