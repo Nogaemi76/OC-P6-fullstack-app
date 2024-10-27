@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 import { FormsModule, ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -11,6 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
+import { Register } from '../../interfaces/register.interface';
+import { AuthService } from '../../services/auth.service';
 
 const materialModules = [
   MatButtonModule,
@@ -41,12 +43,29 @@ export class RegisterComponent {
   registerForm = new FormGroup({
     username: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.pattern(this.passwordRegex)])
+    password: new FormControl('', [Validators.required, Validators.min(8), Validators.pattern(this.passwordRegex)])
   });
 
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    ) {}
+
   // TODO Submit with Register
-  handleSubmit() {
-    alert(this.registerForm.value.username + ' | ' + this.registerForm.value.email + ' | ' + this.registerForm.value.password);
+  // handleSubmit() {
+  //   alert(this.registerForm.value.username + ' | ' + this.registerForm.value.email + ' | ' + this.registerForm.value.password);
+  // }
+
+  public submit(): void {
+    const registerRequest = this.registerForm.value as Register;
+    this.authService.register(registerRequest).subscribe({
+      next: () => {
+        this.router.navigate(['/auth/login']);
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
   }
 
 }
