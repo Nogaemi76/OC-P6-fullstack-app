@@ -12,21 +12,21 @@
           <h1>Se connecter</h1>
         </div>
       </mat-card-title>
-      <form>
+      <form [formGroup]="loginForm" (ngSubmit)="handleSubmit()">
         <mat-card-content>
           <p>
             <mat-form-field appearance="outline">
               <mat-label>E-mail ou nom d’utilisateur</mat-label>
-              <input matInput>
+              <input matInput type="text" formControlName="user">
             </mat-form-field>
           </p>
           <p>
             <mat-form-field appearance="outline">
               <mat-label>Mot de passe</mat-label>
-              <input matInput>
+              <input matInput type="password" formControlName="password">
             </mat-form-field>
           </p>
-          <button mat-flat-button>Se connecter</button>
+          <button mat-flat-button type="submit" [disabled]="!loginForm.valid">Se connecter</button>
         </mat-card-content>
       </form>
     </mat-card>
