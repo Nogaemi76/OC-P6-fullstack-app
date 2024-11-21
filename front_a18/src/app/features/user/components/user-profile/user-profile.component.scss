@@ -1,0 +1,29 @@
+.profile-container {
+  height: calc(100% - 94px);
+
+  .profile-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    mat-card {
+        max-width: 300px;
+        width: 100%;
+        box-shadow: none;
+        background-color: white;
+
+        mat-card-title,
+        mat-card-content {
+          text-align: center;
+        }
+
+        h1 {
+          font-size: 32px;
+        }
+
+        mat-form-field {
+          width: 250px;
+        }
+      }
+  }
+}
