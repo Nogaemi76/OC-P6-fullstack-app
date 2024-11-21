@@ -34,4 +34,8 @@ export class TopicCardComponent {
     return this.topicSubscriptionService.subscribeTopic(this.topic.id).subscribe();
   }
 
+  onUnsubscribeClick() {
+
+  }
+
 }
