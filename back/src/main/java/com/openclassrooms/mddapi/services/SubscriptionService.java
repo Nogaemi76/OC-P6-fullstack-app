@@ -27,7 +27,12 @@ public class SubscriptionService {
 		return savedSubscription;
 	}
 
-	public List<Subscription> getSubscriptionsByUserId(Long userId) {
+	public List<Subscription> getSubscriptionsByUserId(final Long userId) {
 		return (List<Subscription>) subscriptionRepository.findByUserId(userId);
 	}
+
+	public void deleteSubscriptionByTopicIdAndUserId(final Long topicId, final Long userId) {
+		subscriptionRepository.deleteByTopicIdAndUserId(topicId, userId);
+	}
+
 }
