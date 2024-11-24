@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NgFor } from '@angular/common';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -31,6 +32,7 @@ const materialModules = [
   selector: 'app-user-profile',
   standalone: true,
   imports: [
+    NgFor,
     RouterLink,
     RouterOutlet,
     FormsModule,
@@ -55,22 +57,24 @@ export class UserProfileComponent {
     email: new FormControl('', Validators.email)
   });
 
-  constructor(private topicSubscriptionService : TopicSubscriptionService) {}
+  constructor(
+    private topicSubscriptionService : TopicSubscriptionService
+    ) {}
 
   ngOnInit() {
 
     this.topicSubscriptions = [];
     this.topics = [];
 
-    this.topicSubscriptionService.getTopicSubscriptionsByUserId(this.userId).subscribe(
-      {
-      next:(topicSubscriptions:TopicSubscription[]) => {
-        this.topicSubscriptions = topicSubscriptions;
-        console.log(this.topicSubscriptions);
-      },
-      error: error => {
-        console.log(error);
-      }
+    this.topicSubscriptionService.getTopicSubscriptionsByUserId(this.userId).subscribe({
+        next:(topic:Topic[]) => {
+          this.topics = topic;
+          console.log(this.topics);
+        },
+        error: error => {
+          console.log(error);
+        }
     });
   }
+
 }

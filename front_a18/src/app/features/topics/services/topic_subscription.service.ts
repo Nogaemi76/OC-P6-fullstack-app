@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { TopicSubscription } from '../interfaces/topic-subscription.interface';
+import { Topic } from '../interfaces/topic.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,12 @@ export class TopicSubscriptionService {
     return this.httpClient.post<boolean>(`${this.pathSubscription}`,{topicId:id});
   }
 
-  getTopicSubscriptionsByUserId(id: Number): Observable<TopicSubscription[]> {
-    return this.httpClient.get<TopicSubscription[]>(`${this.pathSubscription}/${id}`);
+  getTopicSubscriptionsByUserId(id: Number): Observable<Topic[]> {
+    return this.httpClient.get<Topic[]>(`${this.pathSubscription}/${id}`);
+  }
+
+  deleteSubscriptionByTopicId(topicId: Number): Observable<boolean> {
+    return this.httpClient.delete<boolean>(`${this.pathSubscription}/${topicId}`);
   }
 
 }

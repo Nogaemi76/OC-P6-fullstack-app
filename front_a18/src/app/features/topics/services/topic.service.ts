@@ -15,4 +15,8 @@ constructor(private httpClient : HttpClient) { }
   getAllTopics(): Observable<Topic[]> {
     return this.httpClient.get<Topic[]>(this.pathTopics);
   }
+
+  getTopicById(id: number): Observable<Topic> {
+    return this.httpClient.get<Topic>(`${this.pathTopics}/${id}`)
+  }
 }
