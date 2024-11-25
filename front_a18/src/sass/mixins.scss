@@ -4,10 +4,10 @@
   align-items: center;
 }
 
-@mixin clamp-3-lines {
+@mixin clamp-lines ($line-number) {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: $line-number;
   overflow: hidden;
 }
 
@@ -21,7 +21,7 @@
 
 // list-card
 
-@mixin list-card-style {
+@mixin list-card-style($line-number) {
   padding: 20px;
 
   h3 {
@@ -30,7 +30,7 @@
   }
 
   p {
-    @include clamp-3-lines;
+    @include clamp-lines ($line-number);
   }
 }
 

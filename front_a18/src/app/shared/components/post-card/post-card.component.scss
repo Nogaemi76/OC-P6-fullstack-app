@@ -1,5 +1,17 @@
 @import '../../../../sass/mixins.scss';
 
 .card-content {
-  @include list-card-style;
+  @include list-card-style(5);
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
+
+.flex-basis-50 {
+  display: flex;
+
+  span {
+    flex-basis: 50%;
+  }
 }

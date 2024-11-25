@@ -1,3 +1,5 @@
+@import '../../../../../sass/variables.scss';
+
 .post-list-buttons {
   padding: 20px;
   display: flex;
@@ -8,6 +10,6 @@
   padding: 20px;
 
   mat-grid-tile {
-    background: #F5F5F5;
+    background: $lightgrey-background;
   }
 }

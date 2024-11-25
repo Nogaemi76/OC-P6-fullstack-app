@@ -1,12 +1,9 @@
-.topics {
+@import '../../../../../sass/variables.scss';
+
+.topics_container {
   padding: 20px;
 
   mat-grid-tile {
-    background: #F5F5F5;
-
+    background: $lightgrey-background;
   }
-}
-
-.tile-content {
-  padding: 20px;
 }

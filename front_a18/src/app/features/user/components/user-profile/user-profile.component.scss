@@ -1,3 +1,4 @@
+@import '../../../../../sass/variables.scss';
 @import '../../../../../sass/mixins.scss';
 
 .profile-container {
@@ -17,11 +18,26 @@
         h1 {
           // font-size: 32px;
           @include h1-style;
+          font-weight: 500;
         }
 
         mat-form-field {
           @include form-field-width;
         }
       }
+  }
+
+  .subscriptions_container {
+    padding: 20px;
+
+    h2 {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 500;
+    }
+
+    mat-grid-tile {
+      background: $lightgrey-background;
+    }
   }
 }
