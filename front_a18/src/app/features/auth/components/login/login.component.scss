@@ -1,46 +1,37 @@
+@import '../../../../../sass/mixins.scss';
+
 .login-container {
-  height: calc(100% - 94px);
+  @include page-content-height;
+  @include flex-center;
   position: relative;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   .arrow-button {
-    position: absolute;
-    top: 0;
-    left: 30px;
-    width: fit-content;
-    height: fit-content;
+    @include arrow-button-style;
 
     .mat-icon {
-      font-size: 3rem;
-      width: fit-content;
-      height: fit-content;
+      @include arrow-button-icon-style;
     }
   }
 
   .login-card {
     mat-card {
-      max-width: 300px;
-      width: 100%;
-      box-shadow: none;
-      background-color: white;
+      @include form-card-style(300px);
 
       mat-card-title, mat-card-content {
           text-align: center;
       }
 
       h1 {
-        font-size: 32px;
+        // font-size: 32px;
+        @include h1-style;
       }
 
       .logo-width {
-        width: 225px;
+        @include card-logo-width;
       }
 
       mat-form-field {
-        width: 250px;
+        @include form-field-width;
       }
     }
   }

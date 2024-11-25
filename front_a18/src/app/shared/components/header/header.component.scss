@@ -1,8 +1,11 @@
+@import '../../../../sass/mixins.scss';
+
 .header {
   mat-toolbar {
     background-color: #fff;
     border-bottom: 1px solid #000;
-    height: 94px;
+    // height: 94px;
+    @include header-height;
 
     .logo-width {
       width: 140px;

@@ -1,16 +1,13 @@
+@import '../../../../../sass/mixins.scss';
+
 .profile-container {
-  height: calc(100% - 94px);
+  @include page-content-height;
 
   .profile-form-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-center;
 
     mat-card {
-        max-width: 300px;
-        width: 100%;
-        box-shadow: none;
-        background-color: white;
+        @include form-card-style(300px);
 
         mat-card-title,
         mat-card-content {
@@ -18,11 +15,12 @@
         }
 
         h1 {
-          font-size: 32px;
+          // font-size: 32px;
+          @include h1-style;
         }
 
         mat-form-field {
-          width: 250px;
+          @include form-field-width;
         }
       }
   }
