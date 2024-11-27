@@ -22,6 +22,10 @@ public class TopicService {
 		return (List<Topic>) topicRepository.findAll();
 	}
 
+	public List<Topic> getListTopicsById(List<Long> ids) {
+		return (List<Topic>) topicRepository.findAllById(ids);
+	}
+
 	public Optional<Topic> getTopicById(final Long id) {
 		return topicRepository.findById(id);
 	}
