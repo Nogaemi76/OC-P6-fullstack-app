@@ -1,8 +1,14 @@
 package com.openclassrooms.mddapi.controllers;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +31,31 @@ public class PostController {
 
 	private final ModelMapper modelMapper;
 
+	@GetMapping
+	public List<PostDto> getAllPosts() {
+		List<Post> posts = postService.getAllPosts();
+
+		List<PostDto> postDtos = posts.stream().map(this::convertToDto).collect(Collectors.toList());
+
+		if (postDtos.isEmpty()) {
+			return null;
+		} else {
+			return postDtos;
+		}
+	}
+
+	@GetMapping("/{id}")
+	public PostDto getPostById(@PathVariable("id") final Long id) {
+		Optional<Post> retrievePost = postService.getPostById(id);
+
+		if (retrievePost.isEmpty()) {
+			return null;
+		} else {
+			PostDto retrievePostDto = convertToDto(retrievePost.get());
+			return retrievePostDto;
+		}
+	}
+
 	@PostMapping
 	ResponseEntity<String> addPost(@RequestBody PostDto postDto) {
 
@@ -44,6 +75,11 @@ public class PostController {
 	private Post convertToEntity(PostDto postDto) {
 		Post post = modelMapper.map(postDto, Post.class);
 		return post;
+	}
+
+	private PostDto convertToDto(Post post) {
+		PostDto postDto = modelMapper.map(post, PostDto.class);
+		return postDto;
 	}
 
 }
