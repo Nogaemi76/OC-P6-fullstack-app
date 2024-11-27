@@ -71,6 +71,7 @@ export class PostCreateComponent {
 
   submit(): void {
     const postRequest = this.postForm.value as Post;
+    console.log(postRequest);
     this.postService.createPost(postRequest).subscribe({
       next: () => {
         this.router.navigate(['/posts']);
