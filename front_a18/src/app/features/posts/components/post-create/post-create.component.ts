@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,6 +11,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
+import { Topic } from '../../../topics/interfaces/topic.interface';
+import { TopicService } from '../../../topics/services/topic.service';
+import { Post } from '../../interfaces/post.interface';
+import { PostService } from '../../services/post.service';
 
 const materialModules = [
   MatGridListModule,
@@ -37,5 +41,45 @@ const materialModules = [
   styleUrl: './post-create.component.scss'
 })
 export class PostCreateComponent {
+
+  topics!: Topic[];
+
+  postForm = new FormGroup({
+    topicId: new FormControl(0, Validators.required),
+    title: new FormControl('', Validators.required),
+    content: new FormControl('', Validators.required)
+  });
+
+  constructor(
+    private topicService: TopicService,
+    private postService: PostService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.topics = [];
+
+    this.topicService.getAllTopics().subscribe({
+      next:(topics: Topic[]) => {
+        this.topics = topics;
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+  }
+
+  submit(): void {
+    const postRequest = this.postForm.value as Post;
+    this.postService.createPost(postRequest).subscribe({
+      next: () => {
+        this.router.navigate(['/posts']);
+        console.log(postRequest);
+      },
+      error: error => {
+        console.log(error);
+      }
+    })
+  }
 
 }

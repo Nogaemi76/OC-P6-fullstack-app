@@ -13,37 +13,31 @@
           <h1>Créer un nouvel article</h1>
         </div>
       </mat-card-title>
-      <form>
+      <form [formGroup]="postForm" (ngSubmit)="submit()">
         <mat-card-content>
-          <!-- <p>
-              <mat-form-field appearance="outline">
-                <mat-label>Sélectionner un thème</mat-label>
-                <input matInput placeholder="Sélectionner un thème">
-              </mat-form-field>
-            </p> -->
           <p>
             <mat-form-field appearance="outline">
               <mat-label>Sélectionner un thème</mat-label>
-              <mat-select name="food" placeholder="Sélectionner un thème">
-                <mat-option [value]="">
-                  value
-                </mat-option>
+              <mat-select name="food" placeholder="Sélectionner un thème" formControlName="topicId">
+                @for (topic of topics; track topic) {
+                <mat-option [value]="topic.id">{{topic.title}}</mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </p>
           <p>
             <mat-form-field appearance="outline">
               <mat-label>Titre de l'article</mat-label>
-              <input matInput placeholder="Titre de l'article">
+              <input matInput placeholder="Titre de l'article" formControlName="title">
             </mat-form-field>
           </p>
           <p>
             <mat-form-field appearance="outline">
               <mat-label>Contenu de l'article</mat-label>
-              <textarea matInput placeholder="Contenu de l'article"></textarea>
+              <textarea matInput placeholder="Contenu de l'article" formControlName="content"></textarea>
             </mat-form-field>
           </p>
-          <button mat-flat-button>Créer</button>
+          <button mat-flat-button type="submit" [disabled]="!postForm.valid">Créer</button>
         </mat-card-content>
       </form>
     </mat-card>
