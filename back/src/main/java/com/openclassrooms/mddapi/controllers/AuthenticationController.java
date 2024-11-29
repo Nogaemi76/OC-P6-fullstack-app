@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.dtos.UserDto;
 import com.openclassrooms.mddapi.entities.User;
+import com.openclassrooms.mddapi.responses.TokenResponse;
 import com.openclassrooms.mddapi.services.AuthenticationService;
+import com.openclassrooms.mddapi.services.JwtService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,20 +21,60 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
+	private final JwtService jwtService;
+
 	private final AuthenticationService authenticationService;
 
 	private final ModelMapper modelMapper;
 
 	@PostMapping("/register")
-	public ResponseEntity<String> register(@RequestBody UserDto registeredUserDto) {
+	public ResponseEntity<TokenResponse> register(@RequestBody UserDto registeredUserDto) {
 
 		User registeredUser = convertToEntity(registeredUserDto);
 
 		User authenticatedUser = authenticationService.register(registeredUser);
 
-		String userEmail = authenticatedUser.getEmail();
+		// String userEmail = authenticatedUser.getEmail();
 
-		return new ResponseEntity<String>("{\"message\":\"" + userEmail + " created !\"}", HttpStatus.OK);
+		// return new ResponseEntity<String>("{\"message\":\"" + userEmail + " created
+		// !\"}", HttpStatus.OK);
+
+		String jwtToken = jwtService.generateToken(authenticatedUser);
+
+		TokenResponse tokenResponse = new TokenResponse();
+		tokenResponse.setToken(jwtToken);
+
+		return ResponseEntity.ok(tokenResponse);
+	}
+
+	@PostMapping("/login")
+	public ResponseEntity<?> authenticate(@RequestBody UserDto loggedUserDto) {
+
+		User loggedUser = convertToEntity(loggedUserDto);
+
+		try {
+			User authenticatedUser = authenticationService.authenticate(loggedUser);
+
+			// return ResponseEntity.ok(authenticatedUser.get().getEmail());
+			// return new ResponseEntity<String>("{\"token\":\"" +
+			// authenticatedUser.get().getEmail() + "\"}",
+			// HttpStatus.ACCEPTED);
+
+			String jwtToken = jwtService.generateToken(authenticatedUser);
+
+			TokenResponse tokenResponse = new TokenResponse();
+			tokenResponse.setToken(jwtToken);
+
+			return ResponseEntity.ok(tokenResponse);
+
+		} catch (Exception e) {
+
+			String errorMessage = e.getMessage();
+
+			return new ResponseEntity<String>("{\"message\":\"" + errorMessage + "\"}", HttpStatus.UNAUTHORIZED);
+		}
+
+		// return ResponseEntity.ok("token");
 
 	}
 
