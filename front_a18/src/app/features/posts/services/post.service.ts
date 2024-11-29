@@ -19,4 +19,8 @@ constructor(private httpClient: HttpClient) { }
   getAllPosts(): Observable<Post[]> {
     return this.httpClient.get<Post[]>(this.pathPost);
   }
+
+  getPostById(id: Number) {
+    return this.httpClient.get<Post>(`${this.pathPost}/${id}`);
+  }
 }

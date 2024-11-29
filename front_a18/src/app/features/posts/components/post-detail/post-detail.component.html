@@ -1,8 +1,44 @@
 <app-header></app-header>
 
-<div>
-  <button class="arrow" mat-icon-button routerLink="/">
+<div class="post-detail-container">
+  <button class="arrow-button" mat-icon-button routerLink="/posts">
     <mat-icon>arrow_back</mat-icon>
   </button>
+  <div class="post-detail-content">
+    <div class="post-container">
+      <h1>{{ post.title }}</h1>
+      <div>
+        <span>Date</span>
+        <span>Auteur</span>
+        <span>Theme</span>
+      </div>
+      <p>{{ post.content }}</p>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="comments-container">
+      <h2>Commentaires</h2>
+      <div class="flex">
+        <span>username</span>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla commodo a lectus id ornare. Morbi diam tortor,
+        ullamcorper at ornare vel, luctus blandit turpis. Suspendisse bibendum risus a justo sollicitudin vestibulum. Morbi
+        sollicitudin porttitor mi at pharetra. Suspendisse lacinia eros et sagittis pharetra.</p>
+      </div>
+      <form [formGroup]="commentForm" (ngSubmit)="submit()" class="flex">
+        <!-- <p>
+          <mat-form-field appearance="outline" class="width-100">
+            <mat-label>Entrez votre commentaire</mat-label>
+            <textarea matInput placeholder="Entrez votre commentaire" formControlName="content"></textarea>
+          </mat-form-field>
+        </p> -->
+        <mat-form-field appearance="outline" class="width-100">
+          <mat-label>Entrez votre commentaire</mat-label>
+          <textarea matInput placeholder="Entrez votre commentaire" formControlName="content"></textarea>
+        </mat-form-field>
+        <button mat-flat-button type="submit" [disabled]="!commentForm.valid">Envoyer</button>
+      </form>
+
+    </div>
+  </div>
 </div>
 

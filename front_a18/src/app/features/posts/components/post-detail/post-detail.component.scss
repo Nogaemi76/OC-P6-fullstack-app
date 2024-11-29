@@ -1,0 +1,40 @@
+@import '../../../../../sass/mixins.scss';
+
+.post-detail-container {
+  @include flex-center;
+  position: relative;
+
+  .arrow-button {
+    @include arrow-button-style;
+
+    .mat-icon {
+      @include arrow-button-icon-style;
+    }
+  }
+
+  .post-detail-content {
+    width: 70%;
+
+    .post-container {
+      h1 {
+        @include h1-style;
+      }
+
+      span {
+        margin-right: 20px;
+      }
+    }
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+h2 {
+  font-size: 16px;
+}
+
+.width-100 {
+  width: 100%
+}

@@ -10,7 +10,7 @@
   <mat-grid-list cols="2" rowHeight="270px" gutterSize="20px">
 
     <mat-grid-tile *ngFor="let post of posts">
-      <app-post-card [post]="post"></app-post-card>
+      <app-post-card [post]="post" (click)="navigateToPageDetail(post.id)"></app-post-card>
     </mat-grid-tile>
 
   </mat-grid-list>

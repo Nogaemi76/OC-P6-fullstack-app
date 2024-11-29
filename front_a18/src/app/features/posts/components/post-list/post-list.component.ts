@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -11,6 +11,10 @@ import { PostCardComponent } from '../../../../shared/components/post-card/post-
 import { Post } from '../../interfaces/post.interface';
 import { PostService } from '../../services/post.service';
 import { NgFor } from '@angular/common';
+
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 const materialModules = [
   MatGridListModule,
@@ -36,7 +40,10 @@ export class PostListComponent {
 
   posts!: Post[];
 
-  constructor(private postService: PostService) {}
+  constructor(
+    private postService: PostService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
 
@@ -50,6 +57,10 @@ export class PostListComponent {
       error: error => {
         console.log(error);
       }
-    })
+    });
+  }
+
+  navigateToPageDetail(id:number) {
+    this.router.navigate([`/posts/detail/${id}`]);
   }
 }
