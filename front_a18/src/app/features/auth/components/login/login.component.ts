@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -11,6 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
 import { HeaderComponent } from "../../../../shared/components/header/header.component";
+import { AuthService } from '../../services/auth.service';
+import { Login } from '../../interfaces/login.interface';
 
 const materialModules = [
   MatButtonModule,
@@ -36,12 +38,30 @@ const materialModules = [
 export class LoginComponent {
 
   loginForm = new FormGroup({
-    user: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.min(8)])
   });
 
-   handleSubmit() {
-    alert(this.loginForm.value.user + ' | ' + this.loginForm.value.password);
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  //  handleSubmit() {
+  //   alert(this.loginForm.value.user + ' | ' + this.loginForm.value.password);
+  //  }
+
+   public submit(): void {
+    const loginRequest = this.loginForm.value as Login;
+    console.log(loginRequest);
+    this.authService.login(loginRequest).subscribe({
+      next: () => {
+        this.router.navigate(['/posts']);
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
    }
 
 }
