@@ -12,6 +12,4 @@ export class PostCardComponent {
 
   @Input() post!: Post;
 
-
-
 }
