@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,7 +31,6 @@ const materialModules = [
   standalone: true,
   imports: [
     RouterLink,
-    RouterOutlet,
     FormsModule,
     ReactiveFormsModule,
     ...materialModules,

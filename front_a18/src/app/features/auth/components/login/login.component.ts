@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -27,7 +27,6 @@ const materialModules = [
   standalone: true,
   imports: [
     RouterLink,
-    RouterOutlet,
     FormsModule,
     ReactiveFormsModule,
     ...materialModules,
@@ -47,11 +46,7 @@ export class LoginComponent {
     private router: Router
   ) {}
 
-  //  handleSubmit() {
-  //   alert(this.loginForm.value.user + ' | ' + this.loginForm.value.password);
-  //  }
-
-   public submit(): void {
+   submit(): void {
     const loginRequest = this.loginForm.value as Login;
     console.log(loginRequest);
     this.authService.login(loginRequest).subscribe({

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink} from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
 
@@ -13,7 +13,6 @@ const materialModules = [
   standalone: true,
   imports: [
     RouterLink,
-    RouterOutlet,
     ...materialModules,
   ],
   templateUrl: './home.component.html',

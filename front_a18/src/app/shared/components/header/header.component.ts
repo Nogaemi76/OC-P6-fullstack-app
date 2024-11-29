@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,7 +16,6 @@ const materialModules = [
   standalone: true,
   imports: [
     RouterLink,
-    RouterOutlet,
     ...materialModules
   ],
   templateUrl: './header.component.html',

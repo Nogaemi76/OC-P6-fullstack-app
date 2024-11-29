@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
-import { FormsModule, ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -27,7 +27,6 @@ const materialModules = [
   standalone: true,
   imports: [
     RouterLink,
-    RouterOutlet,
     ReactiveFormsModule,
     ...materialModules,
     HeaderComponent
@@ -49,14 +48,9 @@ export class RegisterComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    ) {}
+  ) {}
 
-  // TODO Submit with Register
-  // handleSubmit() {
-  //   alert(this.registerForm.value.username + ' | ' + this.registerForm.value.email + ' | ' + this.registerForm.value.password);
-  // }
-
-  public submit(): void {
+  submit(): void {
     const registerRequest = this.registerForm.value as Register;
     this.authService.register(registerRequest).subscribe({
       next: () => {

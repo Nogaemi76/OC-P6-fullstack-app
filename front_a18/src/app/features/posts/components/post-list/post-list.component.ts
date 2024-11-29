@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -28,7 +28,6 @@ const materialModules = [
   imports: [
     NgFor,
     RouterLink,
-    RouterOutlet,
     ...materialModules,
     HeaderComponent,
     PostCardComponent
