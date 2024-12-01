@@ -1,22 +1,19 @@
-package com.openclassrooms.mddapi.dtos;
+package com.openclassrooms.mddapi.responses;
 
 import java.time.LocalDate;
 
 import lombok.Data;
 
 @Data
-public class UserDto {
+public class UserResponse {
 
 	private long id;
 
-	private String email;
-
 	private String name;
 
-	private String password;
+	private String email;
 
 	private LocalDate created_at;
 
 	private LocalDate updated_at;
-
 }

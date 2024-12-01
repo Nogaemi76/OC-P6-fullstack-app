@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.dtos.UserDto;
 import com.openclassrooms.mddapi.entities.User;
+import com.openclassrooms.mddapi.responses.UserResponse;
 import com.openclassrooms.mddapi.services.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,11 +26,13 @@ public class UserController {
 	private final ModelMapper modelMapper;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<UserDto> getUserById(@PathVariable("id") final Long id) {
+	public ResponseEntity<UserResponse> getUserById(@PathVariable("id") final Long id) {
 		Optional<User> retrievedUser = userService.getUser(id);
 		UserDto retrievedUserDto = convertToDto(retrievedUser);
 
-		return ResponseEntity.ok(retrievedUserDto);
+		UserResponse retrievedUserResponse = convertToUserResponse(retrievedUserDto);
+
+		return ResponseEntity.ok(retrievedUserResponse);
 	}
 
 	private UserDto convertToDto(Optional<User> user) {
@@ -40,5 +43,17 @@ public class UserController {
 		userDto.setUpdated_at(user.get().getUpdatedAt());
 
 		return userDto;
+	}
+
+	private UserResponse convertToUserResponse(UserDto userDto) {
+		UserResponse userResponse = new UserResponse();
+
+		userResponse.setId(userDto.getId());
+		userResponse.setName(userDto.getName());
+		userResponse.setEmail(userDto.getEmail());
+		userResponse.setCreated_at(userDto.getCreated_at());
+		userResponse.setUpdated_at(userDto.getUpdated_at());
+
+		return userResponse;
 	}
 }

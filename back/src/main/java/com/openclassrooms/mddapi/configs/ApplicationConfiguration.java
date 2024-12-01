@@ -21,9 +21,10 @@ public class ApplicationConfiguration {
 		this.userRepository = userRepository;
 	}
 
+	// TODO EMAIL OR USERNAME ????
 	@Bean
 	UserDetailsService userDetailsService() {
-		return username -> userRepository.findByEmail(username)
+		return email -> userRepository.findByEmail(email)
 				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
 	}
 
