@@ -20,8 +20,11 @@
               <input matInput type="email" formControlName="email">
             </mat-form-field>
           </p>
-          <button mat-flat-button>Sauvegarder</button>
-          <button mat-flat-button>Se déconnecter</button>
+          <div class="form-buttons">
+            <button mat-flat-button>Sauvegarder</button>
+            <button mat-button color="warn" (click)="logOut()">Se déconnecter</button>
+          </div>
+
         </mat-card-content>
       </form>
     </mat-card>
@@ -34,7 +37,7 @@
 
     <mat-grid-list cols="2" rowHeight="220px" gutterSize="20px">
       <mat-grid-tile *ngFor="let topic of topics">
-        <app-topic-card [topic]="topic"></app-topic-card>
+        <app-topic-card [topic]="topic" [isSubscribed]="true"></app-topic-card>
       </mat-grid-tile>
     </mat-grid-list>
 

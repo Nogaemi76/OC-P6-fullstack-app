@@ -4,7 +4,7 @@
   <mat-grid-list cols="2" rowHeight="220px" gutterSize="20px">
 
     <mat-grid-tile *ngFor="let topic of topics">
-      <app-topic-card [topic]="topic"></app-topic-card>
+      <app-topic-card [topic]="topic" [isSubscribed]="false"></app-topic-card>
     </mat-grid-tile>
 
   </mat-grid-list>

@@ -1,9 +1,11 @@
 <div class="card-content">
   <h3>{{ topic.title }}</h3>
   <p>{{ topic.description }}</p>
-  <div>
-    <button mat-flat-button (click)="onSubscribeClick()">S'abonner</button>
-    <button mat-flat-button (click)="onUnsubscribeClick()">Se désabonner</button>
+
+  <div class="buttons-container">
+    <button mat-flat-button (click)="onSubscribeClick()" *ngIf="!isSubscribed">S'abonner</button>
+    <button mat-flat-button (click)="onUnsubscribeClick()" *ngIf="isSubscribed">Se désabonner</button>
   </div>
+
 </div>
 
