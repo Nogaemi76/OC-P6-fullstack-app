@@ -1,24 +1,32 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Register } from '../interfaces/register.interface';
+import { RegisterRequest } from '../interfaces/registerRequest.interface';
 import { Observable } from 'rxjs';
-import { Login } from '../interfaces/login.interface';
+import { LoginRequest } from '../interfaces/loginRequest.interface';
+import { Token } from '../interfaces/token.interface';
+import { User } from '../../user/interfaces/user.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private pathAuth = 'api/auth';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
-  public register(registerRequest: Register): Observable<void> {
-    return this.httpClient.post<void>(`${this.pathAuth}/register`, registerRequest)
+  register(registerRequest: RegisterRequest): Observable<Token> {
+    return this.httpClient.post<Token>(
+      `${this.pathAuth}/register`,
+      registerRequest
+    );
   }
 
-  public login(loginRequest: Login): Observable<any> {
-    return this.httpClient.post<any>(`${this.pathAuth}/login`, loginRequest);
+  login(loginRequest: LoginRequest): Observable<Token> {
+    // console.log('authservice', loginRequest);
+    return this.httpClient.post<Token>(`${this.pathAuth}/login`, loginRequest);
   }
 
+  me(): Observable<User> {
+    return this.httpClient.get<User>(`${this.pathAuth}/me`);
+  }
 }
