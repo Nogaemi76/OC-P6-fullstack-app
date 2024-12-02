@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 import {
   FormControl,
@@ -26,6 +26,8 @@ import { TopicSubscriptionService } from '../../../topics/services/topic_subscri
 import { Topic } from '../../../topics/interfaces/topic.interface';
 
 import { UserSessionService } from '../../../../services/user-session.service';
+import { User } from '../../interfaces/user.interface';
+import { AuthService } from '../../../auth/services/auth.service';
 
 const materialModules = [
   MatGridListModule,
@@ -42,6 +44,7 @@ const materialModules = [
   standalone: true,
   imports: [
     NgFor,
+    NgIf,
     FormsModule,
     ReactiveFormsModule,
     ...materialModules,
@@ -54,9 +57,7 @@ const materialModules = [
 export class UserProfileComponent {
   topicSubscriptions!: TopicSubscription[];
   topics!: Topic[];
-
-  // TODO : Replace with @Input
-  userId: number = 1;
+  user!: User;
 
   profileForm = new FormGroup({
     name: new FormControl(''),
@@ -64,6 +65,7 @@ export class UserProfileComponent {
   });
 
   constructor(
+    private authService : AuthService,
     private topicSubscriptionService: TopicSubscriptionService,
     private userSessionService: UserSessionService,
     private router: Router
@@ -72,18 +74,41 @@ export class UserProfileComponent {
   ngOnInit() {
     this.topicSubscriptions = [];
     this.topics = [];
+    this.user;
 
-    this.topicSubscriptionService
-      .getTopicSubscriptionsByUserId(this.userId)
-      .subscribe({
-        next: (topic: Topic[]) => {
-          this.topics = topic;
-          console.log(this.topics);
+    this.authService.me().subscribe({
+      next: (user: User) => {
+        this.user = user;
+        console.log('user', this.user);
+
+        this.topicSubscriptionService
+          .getTopicSubscriptionsByUserId(this.user!.id)
+          .subscribe({
+            next: (topic: Topic[]) => {
+              this.topics = topic;
+              console.log(this.topics);
+            },
+            error: (error) => {
+              console.log(error);
+            },
+          });
         },
         error: (error) => {
           console.log(error);
         },
-      });
+    });
+
+    // this.topicSubscriptionService
+    //   .getTopicSubscriptionsByUserId(this.userSessionService.user!.id)
+    //   .subscribe({
+    //     next: (topic: Topic[]) => {
+    //       this.topics = topic;
+    //       console.log(this.topics);
+    //     },
+    //     error: (error) => {
+    //       console.log(error);
+    //     },
+    //   });
   }
 
   logOut(): void {

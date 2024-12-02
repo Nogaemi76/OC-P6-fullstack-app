@@ -8,7 +8,7 @@ import { User } from '../features/user/interfaces/user.interface';
 })
 export class UserSessionService {
   isLogged = false;
-  user!: User | undefined;
+  user: User | undefined;
 
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
 

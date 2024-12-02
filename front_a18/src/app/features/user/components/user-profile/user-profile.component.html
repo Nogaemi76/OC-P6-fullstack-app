@@ -8,16 +8,16 @@
       </mat-card-title>
       <form [formGroup]="profileForm">
         <mat-card-content>
-          <p>
+          <p *ngIf="user">
             <mat-form-field appearance="outline">
-              <mat-label>Nom d’utilisateur</mat-label>
-              <input matInput type="text" formControlName="name">
+              <!-- <mat-label>Nom d’utilisateur</mat-label> -->
+              <input matInput type="text" formControlName="name" placeholder="{{user.name}}">
             </mat-form-field>
           </p>
-          <p>
+          <p *ngIf="user">
             <mat-form-field appearance="outline">
-              <mat-label>Adresse e-mail</mat-label>
-              <input matInput type="email" formControlName="email">
+              <!-- <mat-label>Adresse e-mail</mat-label> -->
+              <input matInput type="email" formControlName="email" placeholder="{{user.email}}">
             </mat-form-field>
           </p>
           <div class="form-buttons">
