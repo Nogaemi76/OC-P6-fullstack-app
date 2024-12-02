@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgFor } from '@angular/common';
 
 import { Router, RouterLink } from '@angular/router';
 
@@ -6,19 +7,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 
-import { HeaderComponent } from '../../../../shared/components/header/header.component';
-import { PostCardComponent } from '../../../../shared/components/post-card/post-card.component';
 import { Post } from '../../interfaces/post.interface';
 import { PostService } from '../../services/post.service';
-import { NgFor } from '@angular/common';
 
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { HeaderComponent } from '../../../../shared/components/header/header.component';
+import { PostCardComponent } from '../../../../shared/components/post-card/post-card.component';
 
 const materialModules = [
-  MatGridListModule,
   MatButtonModule,
+  MatGridListModule,
   MatIconModule
 ]
 

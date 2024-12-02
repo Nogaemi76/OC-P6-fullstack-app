@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RegisterRequest } from '../interfaces/registerRequest.interface';
 import { Observable } from 'rxjs';
+
+import { RegisterRequest } from '../interfaces/registerRequest.interface';
 import { LoginRequest } from '../interfaces/loginRequest.interface';
+
 import { Token } from '../interfaces/token.interface';
 import { User } from '../../user/interfaces/user.interface';
 
@@ -22,7 +24,6 @@ export class AuthService {
   }
 
   login(loginRequest: LoginRequest): Observable<Token> {
-    // console.log('authservice', loginRequest);
     return this.httpClient.post<Token>(`${this.pathAuth}/login`, loginRequest);
   }
 

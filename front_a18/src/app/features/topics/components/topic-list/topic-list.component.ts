@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { NgFor } from '@angular/common';
 
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
-import { HeaderComponent } from '../../../../shared/components/header/header.component';
-import { TopicCardComponent } from '../../../../shared/components/topic-card/topic-card.component';
 import { Topic } from '../../interfaces/topic.interface';
 import { TopicService } from '../../services/topic.service';
-import { NgFor } from '@angular/common';
+
+import { HeaderComponent } from '../../../../shared/components/header/header.component';
+import { TopicCardComponent } from '../../../../shared/components/topic-card/topic-card.component';
+
+
 
 const materialModules = [
   MatGridListModule,
