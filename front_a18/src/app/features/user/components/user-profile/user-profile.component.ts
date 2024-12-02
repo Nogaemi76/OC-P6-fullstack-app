@@ -97,18 +97,6 @@ export class UserProfileComponent {
           console.log(error);
         },
     });
-
-    // this.topicSubscriptionService
-    //   .getTopicSubscriptionsByUserId(this.userSessionService.user!.id)
-    //   .subscribe({
-    //     next: (topic: Topic[]) => {
-    //       this.topics = topic;
-    //       console.log(this.topics);
-    //     },
-    //     error: (error) => {
-    //       console.log(error);
-    //     },
-    //   });
   }
 
   logOut(): void {
