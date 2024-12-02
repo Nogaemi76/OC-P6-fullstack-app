@@ -2,13 +2,14 @@
   <mat-toolbar class="background-white border-bottom-black">
     <img src="/logo_p6.png" alt="logo" class="logo-width" />
     <span class="spacer"></span>
-    <div>
+    <div></div>
+    <div *ngIf="isLogged" class="flex">
       <a mat-button routerLink="posts" routerLink="/posts">Articles</a>
       <a mat-button routerLink="topics" routerLink="/topics">Themes</a>
+      <button mat-mini-fab aria-label="" class="fab-button" routerLink="/user/profile">
+        <mat-icon>person</mat-icon>
+      </button>
     </div>
-    <button mat-mini-fab aria-label="" class="fab-button" routerLink="/user/profile">
-      <mat-icon>person</mat-icon>
-    </button>
   </mat-toolbar>
 </p>
 
