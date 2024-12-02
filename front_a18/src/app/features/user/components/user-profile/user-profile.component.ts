@@ -59,7 +59,7 @@ export class UserProfileComponent {
   userId: number = 1;
 
   profileForm = new FormGroup({
-    username: new FormControl(''),
+    name: new FormControl(''),
     email: new FormControl('', Validators.email),
   });
 

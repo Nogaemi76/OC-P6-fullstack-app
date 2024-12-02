@@ -50,7 +50,7 @@ export class RegisterComponent {
     /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/;
 
   registerForm = new FormGroup({
-    username: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,

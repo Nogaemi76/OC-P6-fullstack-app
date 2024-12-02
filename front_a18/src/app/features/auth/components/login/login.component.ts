@@ -61,6 +61,8 @@ export class LoginComponent {
 
     this.authService.login(loginRequest).subscribe({
       next: (response: Token) => {
+        // console.log('response', response);
+        localStorage.removeItem('token');
         localStorage.setItem('token', response.token);
 
         this.authService.me().subscribe((user: User) => {
