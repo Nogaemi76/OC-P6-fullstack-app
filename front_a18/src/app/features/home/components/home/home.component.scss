@@ -7,6 +7,10 @@
 
   img {
     width: calc(100% / 2);
+
+    @media screen and (max-width: 959.98px) {
+      width: 80%;
+    }
   }
 
   .buttons-container {

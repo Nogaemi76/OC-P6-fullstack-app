@@ -33,6 +33,10 @@
       mat-form-field {
         @include form-field-width;
       }
+
+      button {
+        width: 200px;
+      }
     }
   }
 }

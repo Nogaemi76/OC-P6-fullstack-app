@@ -1,4 +1,6 @@
-<app-header></app-header>
+@if (currentScreenSize == 'Medium' || currentScreenSize == 'Large' || currentScreenSize == 'XLarge') {
+  <app-header></app-header>
+}
 
 <div class="register-container">
   <button class="arrow-button" mat-icon-button routerLink="/">
@@ -8,7 +10,11 @@
     <mat-card>
       <mat-card-title>
         <div>
-          <img src="/logo_p6.png" alt="logo" class="logo-width" />
+
+          @if (currentScreenSize == 'Small' || currentScreenSize == 'XSmall') {
+            <img src="/logo_p6.png" alt="logo" class="logo-width" />
+          }
+
           <h1>Inscription</h1>
         </div>
       </mat-card-title>

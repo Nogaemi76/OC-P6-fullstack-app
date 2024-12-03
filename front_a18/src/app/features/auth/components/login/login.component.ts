@@ -2,9 +2,9 @@ import { Component, OnDestroy, inject } from '@angular/core';
 
 import { Router, RouterLink } from '@angular/router';
 
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import {
   ReactiveFormsModule,
@@ -48,14 +48,16 @@ const materialModules = [
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   destroyed = new Subject<void>();
   currentScreenSize!: string;
 
   displayNameMap = new Map([
+    [Breakpoints.XSmall, 'XSmall'],
     [Breakpoints.Small, 'Small'],
     [Breakpoints.Medium, 'Medium'],
     [Breakpoints.Large, 'Large'],
+    [Breakpoints.XLarge, 'XLarge'],
   ]);
 
   loginForm = new FormGroup({
@@ -70,9 +72,11 @@ export class LoginComponent {
   ) {
     inject(BreakpointObserver)
       .observe([
+        Breakpoints.XSmall,
         Breakpoints.Small,
         Breakpoints.Medium,
         Breakpoints.Large,
+        Breakpoints.XLarge,
       ])
       .pipe(takeUntil(this.destroyed))
       .subscribe(result => {
