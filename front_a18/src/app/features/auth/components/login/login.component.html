@@ -1,4 +1,6 @@
-<app-header></app-header>
+@if (currentScreenSize == 'Medium' || currentScreenSize == 'Large') {
+  <app-header></app-header>
+}
 
 <div class="login-container">
   <button class="arrow-button" mat-icon-button routerLink="/">
@@ -8,7 +10,11 @@
     <mat-card>
       <mat-card-title>
         <div>
-          <img src="/logo_p6.png" alt="logo" class="logo-width" />
+
+          @if (currentScreenSize == 'Small') {
+            <img src="/logo_p6.png" alt="logo" class="logo-width" />
+          }
+
           <h1>Se connecter</h1>
         </div>
       </mat-card-title>

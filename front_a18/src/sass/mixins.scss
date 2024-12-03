@@ -13,6 +13,10 @@
 
 @mixin page-content-height {
   height: calc(100% - 94px);
+
+  @media screen and (max-width: 959.98px) {
+    height: 100%;
+  }
 }
 
 @mixin header-height {
@@ -42,6 +46,10 @@
   left: 30px;
   width: fit-content;
   height: fit-content;
+
+  @media screen and (max-width: 959.98px) {
+    left: 10px;
+  }
 }
 
 @mixin arrow-button-icon-style {

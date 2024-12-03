@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 
 import { Router, RouterLink } from '@angular/router';
+
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 import {
   ReactiveFormsModule,
@@ -45,6 +49,15 @@ const materialModules = [
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  destroyed = new Subject<void>();
+  currentScreenSize!: string;
+
+  displayNameMap = new Map([
+    [Breakpoints.Small, 'Small'],
+    [Breakpoints.Medium, 'Medium'],
+    [Breakpoints.Large, 'Large'],
+  ]);
+
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.min(8)]),
@@ -53,8 +66,28 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private userSessionService: UserSessionService,
-    private router: Router
-  ) {}
+    private router: Router,
+  ) {
+    inject(BreakpointObserver)
+      .observe([
+        Breakpoints.Small,
+        Breakpoints.Medium,
+        Breakpoints.Large,
+      ])
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(result => {
+        for (const query of Object.keys(result.breakpoints)) {
+          if (result.breakpoints[query]) {
+            this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
+          }
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
+  }
 
   submit(): void {
     const loginRequest = this.loginForm.value as LoginRequest;
