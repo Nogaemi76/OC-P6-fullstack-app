@@ -1,3 +1,6 @@
+<!-- @if (responsiveService.currentScreenSize == 'Medium' || responsiveService.currentScreenSize == 'Large' || responsiveService.currentScreenSize == 'XLarge') {
+  <p>hello</p>
+} -->
 <app-header></app-header>
 
 <div class="post-list-buttons">
@@ -6,8 +9,9 @@
     <mat-icon>arrow_downward</mat-icon>
   </button>
 </div>
+
 <div class="post-list-container">
-  <mat-grid-list cols="2" rowHeight="270px" gutterSize="20px">
+  <mat-grid-list cols="{{responsiveService.cols}}" rowHeight="270px" gutterSize="20px">
 
     <mat-grid-tile *ngFor="let post of posts">
       <app-post-card [post]="post" (click)="navigateToPageDetail(post.id)"></app-post-card>

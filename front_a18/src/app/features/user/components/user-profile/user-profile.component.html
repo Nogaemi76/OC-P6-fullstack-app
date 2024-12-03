@@ -35,7 +35,7 @@
 
     <h2>Abonnements</h2>
 
-    <mat-grid-list cols="2" rowHeight="220px" gutterSize="20px">
+    <mat-grid-list cols="{{responsiveService.cols}}" rowHeight="220px" gutterSize="20px">
       <mat-grid-tile *ngFor="let topic of topics">
         <app-topic-card [topic]="topic" [isSubscribed]="true"></app-topic-card>
       </mat-grid-tile>

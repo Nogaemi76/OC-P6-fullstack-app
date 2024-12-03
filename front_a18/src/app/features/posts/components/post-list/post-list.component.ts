@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { Post } from '../../interfaces/post.interface';
 import { PostService } from '../../services/post.service';
 
+import { ResponsiveService } from '../../../../services/responsive.service';
+
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
 import { PostCardComponent } from '../../../../shared/components/post-card/post-card.component';
 
@@ -38,7 +40,8 @@ export class PostListComponent {
 
   constructor(
     private postService: PostService,
-    private router: Router
+    private router: Router,
+    public responsiveService: ResponsiveService
   ) {}
 
   ngOnInit(): void {

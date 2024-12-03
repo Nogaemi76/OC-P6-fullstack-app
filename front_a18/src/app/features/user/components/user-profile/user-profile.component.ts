@@ -28,6 +28,7 @@ import { Topic } from '../../../topics/interfaces/topic.interface';
 import { UserSessionService } from '../../../../services/user-session.service';
 import { User } from '../../interfaces/user.interface';
 import { AuthService } from '../../../auth/services/auth.service';
+import { ResponsiveService } from '../../../../services/responsive.service';
 
 const materialModules = [
   MatGridListModule,
@@ -68,7 +69,8 @@ export class UserProfileComponent {
     private authService : AuthService,
     private topicSubscriptionService: TopicSubscriptionService,
     private userSessionService: UserSessionService,
-    private router: Router
+    private router: Router,
+    public responsiveService: ResponsiveService
   ) {}
 
   ngOnInit() {

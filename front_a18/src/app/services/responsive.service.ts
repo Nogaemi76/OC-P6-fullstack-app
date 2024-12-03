@@ -11,6 +11,7 @@ export class ResponsiveService implements OnDestroy {
 
   destroyed = new Subject<void>();
   currentScreenSize!: string;
+  cols!: number;
 
   displayNameMap = new Map([
     [Breakpoints.XSmall, 'XSmall'],
@@ -34,6 +35,12 @@ export class ResponsiveService implements OnDestroy {
         for (const query of Object.keys(result.breakpoints)) {
           if (result.breakpoints[query]) {
             this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
+
+            if (this.currentScreenSize == 'Large' || this.currentScreenSize == 'XLarge' || this.currentScreenSize == 'Medium') {
+              this.cols = 2
+            } else {
+              this.cols = 1
+            }
           }
         }
       });
@@ -43,9 +50,4 @@ export class ResponsiveService implements OnDestroy {
     this.destroyed.next();
     this.destroyed.complete();
   }
-
-  getScreenSize() {
-    return this.currentScreenSize;
-  }
-
 }

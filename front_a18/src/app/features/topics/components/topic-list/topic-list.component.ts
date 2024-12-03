@@ -8,10 +8,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { Topic } from '../../interfaces/topic.interface';
 import { TopicService } from '../../services/topic.service';
 
+import { ResponsiveService } from '../../../../services/responsive.service';
+
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
 import { TopicCardComponent } from '../../../../shared/components/topic-card/topic-card.component';
-
-
 
 const materialModules = [
   MatGridListModule,
@@ -35,7 +35,10 @@ export class TopicListComponent implements OnInit {
 
   topics!: Topic[];
 
-  constructor(private topicService : TopicService) {}
+  constructor(
+    private topicService : TopicService,
+    public responsiveService: ResponsiveService
+  ) {}
 
   ngOnInit(): void {
 
