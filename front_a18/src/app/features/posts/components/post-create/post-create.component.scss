@@ -2,7 +2,7 @@
 
 .post-form-container {
   // height: calc(100% - 94px);
-  @include page-content-height;
+  @include page-content-height-features;
   @include flex-center;
   position: relative;
 
@@ -34,6 +34,10 @@
 
       mat-form-field {
         @include form-field-width;
+      }
+
+      button {
+        width: 200px;
       }
     }
   }

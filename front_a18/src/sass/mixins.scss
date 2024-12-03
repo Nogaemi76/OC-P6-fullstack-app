@@ -19,8 +19,20 @@
   }
 }
 
+@mixin page-content-height-features {
+  height: calc(100% - 94px);
+
+  @media screen and (max-width: 959.98px) {
+    height: calc(100% - 74px);
+  }
+}
+
 @mixin header-height {
   height: 94px;
+
+  @media screen and (max-width: 959.98px) {
+      height: 74px;
+    }
 }
 
 // list-card

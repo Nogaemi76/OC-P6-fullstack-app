@@ -2,35 +2,39 @@
 @import '../../../../../sass/mixins.scss';
 
 .profile-container {
-  @include page-content-height;
+  @include page-content-height-features;
 
   .profile-form-container {
     @include flex-center;
 
     mat-card {
-        @include form-card-style(300px);
+      @include form-card-style(300px);
 
-        mat-card-title,
-        mat-card-content {
-          text-align: center;
-        }
+      mat-card-title,
+      mat-card-content {
+        text-align: center;
+      }
 
-        h1 {
-          // font-size: 32px;
-          @include h1-style;
-          font-weight: 500;
-        }
+      h1 {
+        // font-size: 32px;
+        @include h1-style;
+        font-weight: 500;
+      }
 
-        mat-form-field {
-          @include form-field-width;
-        }
+      mat-form-field {
+        @include form-field-width;
+      }
 
-        .form-buttons {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+      .form-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        button {
+          width: 200px;
         }
       }
+    }
   }
 
   .subscriptions_container {
