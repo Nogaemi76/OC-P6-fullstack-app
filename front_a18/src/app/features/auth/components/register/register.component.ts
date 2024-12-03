@@ -1,10 +1,6 @@
-import { Component, OnDestroy, inject } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Router, RouterLink } from '@angular/router';
-
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 import {
   ReactiveFormsModule,
@@ -27,6 +23,7 @@ import { User } from '../../../user/interfaces/user.interface';
 
 import { AuthService } from '../../services/auth.service';
 import { UserSessionService } from '../../../../services/user-session.service';
+import { ResponsiveService } from '../../../../services/responsive.service';
 
 const materialModules = [
   MatButtonModule,
@@ -48,17 +45,7 @@ const materialModules = [
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
-export class RegisterComponent implements OnDestroy {
-  destroyed = new Subject<void>();
-  currentScreenSize!: string;
-
-  displayNameMap = new Map([
-    [Breakpoints.XSmall, 'XSmall'],
-    [Breakpoints.Small, 'Small'],
-    [Breakpoints.Medium, 'Medium'],
-    [Breakpoints.Large, 'Large'],
-    [Breakpoints.XLarge, 'XLarge'],
-  ]);
+export class RegisterComponent {
 
   // TODO Change the regex
   private passwordRegex: RegExp =
@@ -77,30 +64,9 @@ export class RegisterComponent implements OnDestroy {
   constructor(
     private authService: AuthService,
     private userSessionService: UserSessionService,
-    private router: Router
-  ) {
-    inject(BreakpointObserver)
-      .observe([
-        Breakpoints.XSmall,
-        Breakpoints.Small,
-        Breakpoints.Medium,
-        Breakpoints.Large,
-        Breakpoints.XLarge,
-      ])
-      .pipe(takeUntil(this.destroyed))
-      .subscribe(result => {
-        for (const query of Object.keys(result.breakpoints)) {
-          if (result.breakpoints[query]) {
-            this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
-          }
-        }
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.destroyed.next();
-    this.destroyed.complete();
-  }
+    private router: Router,
+    public responsiveService: ResponsiveService
+  ) { }
 
   submit(): void {
     const registerRequest = this.registerForm.value as RegisterRequest;

@@ -1,4 +1,4 @@
-@if (currentScreenSize == 'Medium' || currentScreenSize == 'Large' || currentScreenSize == 'XLarge') {
+@if (responsiveService.currentScreenSize == 'Medium' || responsiveService.currentScreenSize == 'Large' || responsiveService.currentScreenSize == 'XLarge') {
   <app-header></app-header>
 }
 
@@ -11,7 +11,7 @@
       <mat-card-title>
         <div>
 
-          @if (currentScreenSize == 'Small' || currentScreenSize == 'XSmall') {
+          @if (responsiveService.currentScreenSize == 'Small' || responsiveService.currentScreenSize == 'XSmall') {
             <img src="/logo_p6.png" alt="logo" class="logo-width" />
           }
 
