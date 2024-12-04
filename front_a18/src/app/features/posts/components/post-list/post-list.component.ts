@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 
 import { Router, RouterLink } from '@angular/router';
@@ -34,9 +34,10 @@ const materialModules = [
   templateUrl: './post-list.component.html',
   styleUrl: './post-list.component.scss'
 })
-export class PostListComponent {
+export class PostListComponent implements OnInit, OnDestroy {
 
   posts!: Post[];
+  postsSubscriptions!: any;
 
   constructor(
     private postService: PostService,
@@ -48,7 +49,7 @@ export class PostListComponent {
 
     this.posts = [];
 
-    this.postService.getAllPosts().subscribe({
+    this.postsSubscriptions = this.postService.getAllPosts().subscribe({
       next:(posts: Post[]) => {
         this.posts = posts;
         console.log(this.posts);
@@ -57,6 +58,10 @@ export class PostListComponent {
         console.log(error);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.postsSubscriptions.unsubscribe();
   }
 
   navigateToPageDetail(id:number) {

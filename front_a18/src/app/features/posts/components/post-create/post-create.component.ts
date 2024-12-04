@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 import { Router, RouterLink } from '@angular/router';
 
@@ -39,9 +39,10 @@ const materialModules = [
   templateUrl: './post-create.component.html',
   styleUrl: './post-create.component.scss'
 })
-export class PostCreateComponent {
+export class PostCreateComponent implements OnDestroy {
 
   topics!: Topic[];
+  topicsSubscriptions!: any;
 
   postForm = new FormGroup({
     topicId: new FormControl(0, Validators.required),
@@ -58,7 +59,7 @@ export class PostCreateComponent {
   ngOnInit(): void {
     this.topics = [];
 
-    this.topicService.getAllTopics().subscribe({
+    this.topicsSubscriptions = this.topicService.getAllTopics().subscribe({
       next:(topics: Topic[]) => {
         this.topics = topics;
       },
@@ -66,6 +67,10 @@ export class PostCreateComponent {
         console.log(error);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.topicsSubscriptions.unsubscribe();
   }
 
   submit(): void {

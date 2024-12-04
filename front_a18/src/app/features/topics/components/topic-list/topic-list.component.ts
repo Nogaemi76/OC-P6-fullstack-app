@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -31,9 +31,10 @@ const materialModules = [
   templateUrl: './topic-list.component.html',
   styleUrl: './topic-list.component.scss'
 })
-export class TopicListComponent implements OnInit {
+export class TopicListComponent implements OnInit, OnDestroy {
 
   topics!: Topic[];
+  topicsSubscriptions!: any;
 
   constructor(
     private topicService : TopicService,
@@ -44,7 +45,7 @@ export class TopicListComponent implements OnInit {
 
     this.topics = [];
 
-    this.topicService.getAllTopics().subscribe(
+    this.topicsSubscriptions = this.topicService.getAllTopics().subscribe(
       {
         next:(topics: Topic[]) => {
           this.topics = topics;
@@ -56,5 +57,9 @@ export class TopicListComponent implements OnInit {
         }
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.topicsSubscriptions.unsubscribe();
   }
 }

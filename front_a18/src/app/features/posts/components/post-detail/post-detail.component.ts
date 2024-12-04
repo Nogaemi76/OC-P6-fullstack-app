@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { RouterLink } from '@angular/router';
 
@@ -35,7 +35,7 @@ const materialModules = [
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss'
 })
-export class PostDetailComponent {
+export class PostDetailComponent implements OnInit, OnDestroy {
 
   postId!: number;
   post: Post = {
@@ -45,6 +45,8 @@ export class PostDetailComponent {
     title: '',
     content: ''
   }
+
+  postSubscription!: any;
 
   commentRequest: CommentRequest = {
     topicId: 0,
@@ -59,7 +61,8 @@ export class PostDetailComponent {
   @Input()
   set id(postId: number) {
     console.log(postId);
-    this.postService.getPostById(postId).subscribe({
+
+    this.postSubscription =  this.postService.getPostById(postId).subscribe({
       next:(post:Post) => {
         this.post = post;
         console.log(this.post);
@@ -74,7 +77,12 @@ export class PostDetailComponent {
     private postService: PostService,
   ) {}
 
+
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.postSubscription.unsubscribe();
   }
 
   submit(): void {
