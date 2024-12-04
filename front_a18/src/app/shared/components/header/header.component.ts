@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
+import { NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { NgIf } from '@angular/common';
+
 import { UserSessionService } from '../../../services/user-session.service';
 
 const materialModules = [
   MatToolbarModule,
   MatButtonModule,
-  MatIconModule
+  MatIconModule,
 ];
 
 @Component({
@@ -35,6 +36,10 @@ export class HeaderComponent {
   ngOnInit(): void {
 
     this.isLogged = this.userSessionService.isLogged;
+  }
+
+  toggleMenu() {
+    alert("hello");
   }
 
 }
