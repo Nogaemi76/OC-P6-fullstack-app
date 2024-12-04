@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,12 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.dtos.PostDto;
 import com.openclassrooms.mddapi.entities.Post;
+import com.openclassrooms.mddapi.entities.Topic;
+import com.openclassrooms.mddapi.entities.User;
+import com.openclassrooms.mddapi.responses.PostResponse;
 import com.openclassrooms.mddapi.services.PostService;
+import com.openclassrooms.mddapi.services.TopicService;
+import com.openclassrooms.mddapi.services.UserService;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 
-@Log
+//@Log
 @RequestMapping("/api/posts")
 @RestController
 @RequiredArgsConstructor
@@ -29,41 +35,46 @@ public class PostController {
 
 	private final PostService postService;
 
+	private final UserService userService;
+
+	private final TopicService topicService;
+
 	private final ModelMapper modelMapper;
 
 	@GetMapping
-	public List<PostDto> getAllPosts() {
+	public List<PostResponse> getAllPosts() {
 		List<Post> posts = postService.getAllPosts();
 
-		List<PostDto> postDtos = posts.stream().map(this::convertToDto).collect(Collectors.toList());
+		List<PostResponse> postResponses = posts.stream().map(this::convertToPostResponse).collect(Collectors.toList());
 
-		if (postDtos.isEmpty()) {
-			return null;
-		} else {
-			return postDtos;
-		}
+		return postResponses;
+
 	}
 
 	@GetMapping("/{id}")
-	public PostDto getPostById(@PathVariable("id") final Long id) {
+	public PostResponse getPostById(@PathVariable("id") final Long id) {
 		Optional<Post> retrievePost = postService.getPostById(id);
 
 		if (retrievePost.isEmpty()) {
 			return null;
 		} else {
-			PostDto retrievePostDto = convertToDto(retrievePost.get());
-			return retrievePostDto;
+
+			PostResponse postResponse = convertToPostResponse(retrievePost.get());
+
+			return postResponse;
 		}
 	}
 
 	@PostMapping
 	ResponseEntity<String> addPost(@RequestBody PostDto postDto) {
 
-		log.info(postDto.toString());
-		// TODO : GET USER ID WITH TOKEN
-		postDto.setAuthorId(1L);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
 
-		log.info(postDto.toString());
+		Optional<User> user = userService.getUserByEmail(username);
+
+		Long userId = user.get().getId();
+		postDto.setAuthorId(userId);
 
 		Post post = convertToEntity(postDto);
 
@@ -74,12 +85,31 @@ public class PostController {
 
 	private Post convertToEntity(PostDto postDto) {
 		Post post = modelMapper.map(postDto, Post.class);
+
+		post.setCreatedAt(postDto.getCreated_at());
+		post.setUpdatedAt(postDto.getUpdated_at());
+
 		return post;
 	}
 
-	private PostDto convertToDto(Post post) {
-		PostDto postDto = modelMapper.map(post, PostDto.class);
-		return postDto;
+	private PostResponse convertToPostResponse(Post post) {
+
+		Optional<User> author = userService.getUser(post.getAuthorId());
+		Optional<Topic> topic = topicService.getTopicById(post.getTopicId());
+
+		PostResponse postResponse = new PostResponse();
+
+		postResponse.setId(post.getId());
+		postResponse.setTitle(post.getTitle());
+		postResponse.setContent(post.getContent());
+
+		postResponse.setAuthor(author.get().getName());
+		postResponse.setTopic(topic.get().getTitle());
+
+		postResponse.setCreated_at(post.getCreatedAt());
+		postResponse.setUpdated_at(post.getUpdatedAt());
+
+		return postResponse;
 	}
 
 }
