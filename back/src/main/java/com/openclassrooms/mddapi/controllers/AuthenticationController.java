@@ -22,9 +22,8 @@ import com.openclassrooms.mddapi.services.JwtService;
 import com.openclassrooms.mddapi.services.UserService;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 
-@Log
+//@Log
 @RequestMapping("/api/auth")
 @RestController
 @RequiredArgsConstructor
@@ -45,11 +44,6 @@ public class AuthenticationController {
 
 		User authenticatedUser = authenticationService.register(registeredUser);
 
-		// String userEmail = authenticatedUser.getEmail();
-
-		// return new ResponseEntity<String>("{\"message\":\"" + userEmail + " created
-		// !\"}", HttpStatus.OK);
-
 		String jwtToken = jwtService.generateToken(authenticatedUser);
 
 		TokenResponse tokenResponse = new TokenResponse();
@@ -61,29 +55,15 @@ public class AuthenticationController {
 	@PostMapping("/login")
 	public ResponseEntity<?> authenticate(@RequestBody UserDto loggedUserDto) {
 
-		log.info(loggedUserDto.toString());
-
 		User loggedUser = convertToEntity(loggedUserDto);
-
-		log.info(loggedUser.toString());
 
 		try {
 			User authenticatedUser = authenticationService.authenticate(loggedUser);
-
-			// return ResponseEntity.ok(authenticatedUser.get().getEmail());
-			// return new ResponseEntity<String>("{\"token\":\"" +
-			// authenticatedUser.get().getEmail() + "\"}",
-			// HttpStatus.ACCEPTED);
-
-			log.info(authenticatedUser.toString());
 
 			String jwtToken = jwtService.generateToken(authenticatedUser);
 
 			TokenResponse tokenResponse = new TokenResponse();
 			tokenResponse.setToken(jwtToken);
-
-			log.info(jwtToken);
-			log.info(tokenResponse.toString());
 
 			return ResponseEntity.ok(tokenResponse);
 
@@ -93,17 +73,12 @@ public class AuthenticationController {
 
 			return new ResponseEntity<String>("{\"message\":\"" + errorMessage + "\"}", HttpStatus.UNAUTHORIZED);
 		}
-
-		// return ResponseEntity.ok("token");
-
 	}
 
 	@GetMapping("/me")
 	public ResponseEntity<UserResponse> getAuthenticatedUser() {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-		log.info(authentication.toString());
 
 		String username = authentication.getName();
 
@@ -112,8 +87,6 @@ public class AuthenticationController {
 		UserDto currentUserDto = convertToDto(currentUser);
 
 		UserResponse currentUserResponse = convertToUserResponse(currentUserDto);
-
-		log.info(currentUserResponse.toString());
 
 		return ResponseEntity.ok(currentUserResponse);
 
