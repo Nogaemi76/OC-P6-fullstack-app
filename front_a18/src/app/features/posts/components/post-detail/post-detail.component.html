@@ -8,9 +8,9 @@
     <div class="post-container">
       <h1>{{ post.title }}</h1>
       <div>
-        <span>Date</span>
-        <span>Auteur</span>
-        <span>Theme</span>
+        <span>{{ post.created_at }}</span>
+        <span>{{ post.author }}</span>
+        <span>{{ post.topic }}</span>
       </div>
       <p>{{ post.content }}</p>
     </div>

@@ -40,10 +40,11 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   postId!: number;
   post: Post = {
     id: 0,
-    authorId: 0,
-    topicId: 0,
+    author: '',
+    topic: '',
     title: '',
-    content: ''
+    content: '',
+    created_at: ''
   }
 
   postSubscription!: any;
@@ -65,7 +66,8 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     this.postSubscription =  this.postService.getPostById(postId).subscribe({
       next:(post:Post) => {
         this.post = post;
-        console.log(this.post);
+        console.log('post', post)
+        console.log('this.post', this.post);
       },
       error: error => {
         console.log(error);

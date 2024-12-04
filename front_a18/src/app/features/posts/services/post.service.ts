@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Post } from '../interfaces/post.interface';
 import { Observable } from 'rxjs';
+import { PostRequest } from '../interfaces/postRequest.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class PostService {
 
 constructor(private httpClient: HttpClient) { }
 
-  createPost(postRequest: Post): Observable<void> {
+  createPost(postRequest: PostRequest): Observable<void> {
     return this.httpClient.post<void>(this.pathPost, postRequest);
   }
 

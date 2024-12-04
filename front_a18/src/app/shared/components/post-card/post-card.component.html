@@ -1,8 +1,8 @@
 <div class="card-content">
   <h3>{{ post.title }}</h3>
   <div class="margin-bottom-20 flex-basis-50">
-    <span>Date</span>
-    <span>Auteur</span>
+    <span>{{ post.created_at }}</span>
+    <span>{{ post.author }}</span>
   </div>
   <p>{{ post.content }}</p>
 </div>

@@ -15,6 +15,7 @@ import { Topic } from '../../../topics/interfaces/topic.interface';
 import { TopicService } from '../../../topics/services/topic.service';
 import { Post } from '../../interfaces/post.interface';
 import { PostService } from '../../services/post.service';
+import { PostRequest } from '../../interfaces/postRequest.interface';
 
 const materialModules = [
   MatGridListModule,
@@ -74,7 +75,7 @@ export class PostCreateComponent implements OnDestroy {
   }
 
   submit(): void {
-    const postRequest = this.postForm.value as Post;
+    const postRequest = this.postForm.value as PostRequest;
     console.log(postRequest);
     this.postService.createPost(postRequest).subscribe({
       next: () => {
