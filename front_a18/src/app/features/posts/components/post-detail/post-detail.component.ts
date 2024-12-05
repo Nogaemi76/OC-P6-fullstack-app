@@ -1,6 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { NgFor } from '@angular/common';
 
 import { RouterLink } from '@angular/router';
+
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,11 +11,15 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-import { HeaderComponent } from '../../../../shared/components/header/header.component';
-import { PostService } from '../../services/post.service';
 import { Post } from '../../interfaces/post.interface';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommentRequest } from '../../interfaces/commentRequest';
+import { PostService } from '../../services/post.service';
+
+import { CommentRequest } from '../../interfaces/commentRequest.interface';
+import { Comment } from '../../interfaces/comment.interface';
+import { CommentService } from '../../services/comment.service';
+
+import { HeaderComponent } from '../../../../shared/components/header/header.component';
+
 
 const materialModules = [
   MatButtonModule,
@@ -26,6 +33,7 @@ const materialModules = [
   selector: 'app-post-detail',
   standalone: true,
   imports: [
+    NgFor,
     RouterLink,
     FormsModule,
     ReactiveFormsModule,
@@ -47,11 +55,13 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     created_at: ''
   }
 
+  comments!: Comment[];
+
   postSubscription!: any;
+  commentSubscription!: any;
 
   commentRequest: CommentRequest = {
-    topicId: 0,
-    userId: 0,
+    postId: 0,
     content: ''
   }
 
@@ -73,23 +83,51 @@ export class PostDetailComponent implements OnInit, OnDestroy {
         console.log(error);
       }
     });
+
+    this.commentSubscription = this.commentService.getCommentsByPostId(postId).subscribe({
+      next:(comments: Comment[]) => {
+        this.comments = comments;
+
+        console.log('this.comments', this.comments);
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
   }
 
   constructor(
     private postService: PostService,
+    private commentService: CommentService
   ) {}
 
 
   ngOnInit(): void {
+
   }
 
   ngOnDestroy(): void {
     this.postSubscription.unsubscribe();
+    this.commentSubscription.unsubscribe();
   }
 
   submit(): void {
     console.log(this.post);
     console.log(this.commentForm.value);
-  }
 
+    const commentRequest = this.commentForm.value as CommentRequest;
+    commentRequest.postId = this.post.id;
+
+    console.log(commentRequest);
+
+    this.commentService.createComment(commentRequest).subscribe({
+      next: () => {
+        console.log("SUCCESS");
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+
+  }
 }
