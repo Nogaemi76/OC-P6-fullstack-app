@@ -2,16 +2,25 @@
   <mat-toolbar class="background-white border-bottom-black">
     <img src="/logo_p6.png" alt="logo" class="logo-width" />
     <span class="spacer"></span>
-    <div></div>
+    <!-- <div></div> -->
+
     <div *ngIf="isLogged" class="flex">
-      <a mat-button routerLink="posts" routerLink="/posts">Articles</a>
-      <a mat-button routerLink="topics" routerLink="/topics">Themes</a>
-      <button mat-mini-fab aria-label="" class="fab-button" routerLink="/user/profile">
-        <mat-icon>person</mat-icon>
-      </button>
-      <button mat-icon-button aria-label="icon-button with menu icon" (click)="toggleMenu()">
-        <mat-icon>menu</mat-icon>
-      </button>
+
+      @if (responsiveService.currentScreenSize == 'Medium' || responsiveService.currentScreenSize == 'Large' ||
+      responsiveService.currentScreenSize == 'XLarge') {
+        <a mat-button routerLink="posts" routerLink="/posts">Articles</a>
+        <a mat-button routerLink="topics" routerLink="/topics">Themes</a>
+        <button mat-mini-fab aria-label="" class="fab-button" routerLink="/user/profile">
+          <mat-icon>person</mat-icon>
+        </button>
+      }
+
+      @if (responsiveService.currentScreenSize == 'Small' || responsiveService.currentScreenSize == 'XSmall') {
+        <button mat-icon-button aria-label="icon-button with menu icon" (click)="toggleMenu()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      }
+
     </div>
   </mat-toolbar>
 </p>

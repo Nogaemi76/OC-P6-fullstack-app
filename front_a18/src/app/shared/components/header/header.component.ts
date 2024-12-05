@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { UserSessionService } from '../../../services/user-session.service';
+import { ResponsiveService } from '../../../services/responsive.service';
 
 const materialModules = [
   MatToolbarModule,
@@ -30,7 +31,8 @@ export class HeaderComponent {
   isLogged: Boolean = false;
 
   constructor(
-    private userSessionService : UserSessionService
+    private userSessionService : UserSessionService,
+    public responsiveService: ResponsiveService
   ) {}
 
   ngOnInit(): void {
