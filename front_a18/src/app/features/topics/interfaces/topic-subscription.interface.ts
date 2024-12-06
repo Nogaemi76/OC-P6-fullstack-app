@@ -1,5 +1,5 @@
 export interface TopicSubscription {
-  id?: number,
-  topicId: number,
-  userId: number,
+  id?: number;
+  topicId: number;
+  userId: number;
 }
