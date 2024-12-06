@@ -16,9 +16,7 @@
       }
 
       h1 {
-        // font-size: 32px;
-        @include h1-style;
-        font-weight: 500;
+        @include page-title(700);
       }
 
       mat-form-field {
@@ -41,9 +39,14 @@
     padding: 20px;
 
     h2 {
+      @include page-title(700);
       text-align: center;
-      font-size: 32px;
-      font-weight: 500;
+      // font-size: 32px;
+      // font-weight: 500;
+
+      @media screen and (max-width: 959.98px) {
+        display: none;
+      }
     }
 
     mat-grid-tile {

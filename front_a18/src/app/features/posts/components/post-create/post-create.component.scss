@@ -1,7 +1,6 @@
 @import '../../../../../sass/mixins.scss';
 
 .post-form-container {
-  // height: calc(100% - 94px);
   @include page-content-height-features;
   @include flex-center;
   position: relative;
@@ -24,8 +23,7 @@
       }
 
       h1 {
-        //font-size: 32px;
-        @include h1-style;
+        @include page-title(700);
       }
 
       .logo-width {

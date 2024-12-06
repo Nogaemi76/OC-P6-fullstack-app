@@ -42,7 +42,7 @@
 
   h3 {
     font-size: 24px;
-    font-weight: 500;
+    font-weight: 700;
   }
 
   p {
@@ -79,8 +79,13 @@
   background-color: white;
 }
 
-@mixin h1-style {
+// @mixin h1-style {
+//   font-size: 32px;
+// }
+
+@mixin page-title ($font-weight) {
   font-size: 32px;
+  font-weight: $font-weight;
 }
 
 @mixin card-logo-width {
