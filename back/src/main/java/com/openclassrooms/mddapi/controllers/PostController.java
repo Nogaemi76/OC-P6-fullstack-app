@@ -27,7 +27,6 @@ import com.openclassrooms.mddapi.services.UserService;
 
 import lombok.RequiredArgsConstructor;
 
-//@Log
 @RequestMapping("/api/posts")
 @RestController
 @RequiredArgsConstructor

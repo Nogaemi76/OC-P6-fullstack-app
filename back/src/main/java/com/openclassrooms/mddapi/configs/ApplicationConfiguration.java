@@ -21,7 +21,6 @@ public class ApplicationConfiguration {
 		this.userRepository = userRepository;
 	}
 
-	// TODO EMAIL OR USERNAME ????
 	@Bean
 	UserDetailsService userDetailsService() {
 		return email -> userRepository.findByEmail(email)

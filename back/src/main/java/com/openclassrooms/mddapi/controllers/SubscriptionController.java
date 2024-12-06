@@ -28,7 +28,6 @@ import com.openclassrooms.mddapi.services.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
-//@Log
 @RequestMapping("/api/subscriptions")
 @RestController
 @RequiredArgsConstructor
@@ -79,8 +78,6 @@ public class SubscriptionController {
 	@GetMapping("/{id}")
 	public List<Topic> getTopicSubscribedByUseriD(@PathVariable("id") final Long id) {
 		List<Subscription> subscriptionList = subscriptionService.getSubscriptionsByUserId(id);
-
-		// log.info(subscriptionList.toString());
 
 		List<Long> listId = subscriptionList.stream().map(e -> e.getTopicId()).toList();
 
