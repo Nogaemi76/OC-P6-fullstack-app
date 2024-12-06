@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,6 +22,7 @@ const materialModules = [
   imports: [
     NgIf,
     RouterLink,
+    RouterLinkActive,
     ...materialModules
   ],
   templateUrl: './header.component.html',

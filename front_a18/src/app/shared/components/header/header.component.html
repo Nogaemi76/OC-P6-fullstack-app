@@ -7,9 +7,9 @@
 
       @if (responsiveService.currentScreenSize == 'Medium' || responsiveService.currentScreenSize == 'Large' ||
       responsiveService.currentScreenSize == 'XLarge') {
-        <a mat-button routerLink="posts" routerLink="/posts">Articles</a>
-        <a mat-button routerLink="topics" routerLink="/topics">Themes</a>
-        <button mat-mini-fab aria-label="" class="fab-button" routerLink="/user/profile">
+        <a mat-button routerLink="/posts" routerLinkActive="active-link">Articles</a>
+        <a mat-button routerLink="/topics" routerLinkActive="active-link">Themes</a>
+        <button mat-mini-fab aria-label="" class="fab-button" routerLink="/user/profile" routerLinkActive="active-button">
           <mat-icon>person</mat-icon>
         </button>
       }
