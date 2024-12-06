@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { UserSessionService } from '../../../services/user-session.service';
 import { ResponsiveService } from '../../../services/responsive.service';
+import { SidenavService } from '../../../services/sidenav.service';
 
 const materialModules = [
   MatToolbarModule,
@@ -32,15 +33,16 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private userSessionService : UserSessionService,
-    public responsiveService: ResponsiveService
+    public responsiveService: ResponsiveService,
+    private sideNavService: SidenavService
   ) {}
 
   ngOnInit(): void {
     this.isLogged = this.userSessionService.isLogged;
   }
 
-  toggleMenu() {
-    alert("hello");
+  toggleSidebar() {
+    this.sideNavService.toggleSidenav();
   }
 
 }

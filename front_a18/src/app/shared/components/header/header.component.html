@@ -2,7 +2,6 @@
   <mat-toolbar class="background-white border-bottom-black">
     <img src="/logo_p6.png" alt="logo" class="logo-width" />
     <span class="spacer"></span>
-    <!-- <div></div> -->
 
     <div *ngIf="isLogged" class="flex">
 
@@ -16,7 +15,7 @@
       }
 
       @if (responsiveService.currentScreenSize == 'Small' || responsiveService.currentScreenSize == 'XSmall') {
-        <button mat-icon-button aria-label="icon-button with menu icon" (click)="toggleMenu()">
+        <button mat-icon-button aria-label="icon-button with menu icon" (click)="toggleSidebar()">
           <mat-icon>menu</mat-icon>
         </button>
       }
