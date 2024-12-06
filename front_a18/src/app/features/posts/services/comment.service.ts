@@ -16,12 +16,7 @@ export class CommentService {
     return this.httpClient.post<void>(this.pathComment, commentRequest);
   }
 
-  // getCommentsByPostId(id: Number): Observable<Comment[]> {
-  //   return this.httpClient.get<Comment[]>(`${this.pathComment}/${id}`);
-  // }
-
    getCommentsByPostId(postId: Number): Observable<any> {
     return this.httpClient.get<any>(`${this.pathComment}/${postId}`);
   }
-
 }
