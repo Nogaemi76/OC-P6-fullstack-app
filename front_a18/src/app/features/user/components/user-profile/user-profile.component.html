@@ -6,17 +6,15 @@
       <mat-card-title>
         <h1>Profil utilisateur</h1>
       </mat-card-title>
-      <form [formGroup]="profileForm">
+      <form [formGroup]="profileForm" (ngSubmit)="submit()">
         <mat-card-content>
           <p *ngIf="user">
             <mat-form-field appearance="outline">
-              <!-- <mat-label>Nom d’utilisateur</mat-label> -->
               <input matInput type="text" formControlName="name" placeholder="{{user.name}}">
             </mat-form-field>
           </p>
           <p *ngIf="user">
             <mat-form-field appearance="outline">
-              <!-- <mat-label>Adresse e-mail</mat-label> -->
               <input matInput type="email" formControlName="email" placeholder="{{user.email}}">
             </mat-form-field>
           </p>

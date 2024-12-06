@@ -27,7 +27,9 @@ import { Topic } from '../../../topics/interfaces/topic.interface';
 
 import { UserSessionService } from '../../../../services/user-session.service';
 import { User } from '../../interfaces/user.interface';
-import { AuthService } from '../../../auth/services/auth.service';
+import { UserRequest } from '../../interfaces/userRequest.interface';
+import { UserService } from '../../services/user.service';
+
 import { ResponsiveService } from '../../../../services/responsive.service';
 
 const materialModules = [
@@ -58,7 +60,9 @@ const materialModules = [
 export class UserProfileComponent {
   topicSubscriptions!: TopicSubscription[];
   topics!: Topic[];
+
   user!: User;
+  userId!: Number;
 
   profileForm = new FormGroup({
     name: new FormControl(''),
@@ -66,9 +70,9 @@ export class UserProfileComponent {
   });
 
   constructor(
-    private authService : AuthService,
     private topicSubscriptionService: TopicSubscriptionService,
     private userSessionService: UserSessionService,
+    private userService: UserService,
     private router: Router,
     public responsiveService: ResponsiveService
   ) {}
@@ -78,31 +82,52 @@ export class UserProfileComponent {
     this.topics = [];
     this.user;
 
-    this.authService.me().subscribe({
+    this.userId = this.userSessionService.user?.id || 0;
+
+    this.userService.getUserById(this.userId).subscribe({
       next: (user: User) => {
         this.user = user;
-        console.log('user', this.user);
 
         this.topicSubscriptionService
           .getTopicSubscriptionsByUserId(this.user!.id)
           .subscribe({
             next: (topic: Topic[]) => {
               this.topics = topic;
-              console.log(this.topics);
             },
             error: (error) => {
               console.log(error);
             },
           });
-        },
-        error: (error) => {
-          console.log(error);
-        },
+      },
+      error: (error) => {
+        console.log(error);
+      },
     });
   }
 
   logOut(): void {
     this.userSessionService.logOut();
     this.router.navigate(['']);
+  }
+
+  submit(): void {
+    const userRequest = this.profileForm.value as UserRequest;
+
+    this.userService.updateUser(this.userId , userRequest).subscribe({
+      next: () => {
+         this.userService.getUserById(this.userId).subscribe({
+          next: (user: User) => {
+            this.user = user;
+            this.profileForm.setValue({ name: '', email: ''});
+          },
+          error: (error) => {
+            console.log(error);
+          },
+         })
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
   }
 }
