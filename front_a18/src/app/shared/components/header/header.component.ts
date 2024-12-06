@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -26,7 +26,7 @@ const materialModules = [
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
   isLogged: Boolean = false;
 
@@ -36,7 +36,6 @@ export class HeaderComponent {
   ) {}
 
   ngOnInit(): void {
-
     this.isLogged = this.userSessionService.isLogged;
   }
 

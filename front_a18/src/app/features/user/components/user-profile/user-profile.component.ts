@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
 
@@ -57,12 +57,15 @@ const materialModules = [
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss',
 })
-export class UserProfileComponent {
-  topicSubscriptions!: TopicSubscription[];
+export class UserProfileComponent implements OnInit, OnDestroy {
+  topicSubscriptionArray!: TopicSubscription[];
   topics!: Topic[];
 
   user!: User;
   userId!: Number;
+
+  userSubscriptions!: any;
+  topicsSubscriptions!: any;
 
   profileForm = new FormGroup({
     name: new FormControl(''),
@@ -77,18 +80,19 @@ export class UserProfileComponent {
     public responsiveService: ResponsiveService
   ) {}
 
+
   ngOnInit() {
-    this.topicSubscriptions = [];
+    this.topicSubscriptionArray = [];
     this.topics = [];
     this.user;
 
     this.userId = this.userSessionService.user?.id || 0;
 
-    this.userService.getUserById(this.userId).subscribe({
+    this.userSubscriptions = this.userService.getUserById(this.userId).subscribe({
       next: (user: User) => {
         this.user = user;
 
-        this.topicSubscriptionService
+        this.topicsSubscriptions = this.topicSubscriptionService
           .getTopicSubscriptionsByUserId(this.user!.id)
           .subscribe({
             next: (topic: Topic[]) => {
@@ -105,6 +109,11 @@ export class UserProfileComponent {
     });
   }
 
+  ngOnDestroy(): void {
+    this.userSubscriptions.unsubscribe();
+    this.topicsSubscriptions.unsubscribe();
+  }
+
   logOut(): void {
     this.userSessionService.logOut();
     this.router.navigate(['']);
@@ -115,7 +124,7 @@ export class UserProfileComponent {
 
     this.userService.updateUser(this.userId , userRequest).subscribe({
       next: () => {
-         this.userService.getUserById(this.userId).subscribe({
+         this.userSubscriptions = this.userService.getUserById(this.userId).subscribe({
           next: (user: User) => {
             this.user = user;
             this.profileForm.setValue({ name: '', email: ''});

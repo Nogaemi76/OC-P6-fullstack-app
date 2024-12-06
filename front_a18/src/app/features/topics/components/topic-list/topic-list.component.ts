@@ -49,8 +49,6 @@ export class TopicListComponent implements OnInit, OnDestroy {
       {
         next:(topics: Topic[]) => {
           this.topics = topics;
-          console.log(this.topics);
-
         },
         error: error => {
           console.log(error);
