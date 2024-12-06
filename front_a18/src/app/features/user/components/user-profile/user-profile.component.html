@@ -35,7 +35,7 @@
 
     <mat-grid-list cols="{{responsiveService.cols}}" rowHeight="220px" gutterSize="20px">
       <mat-grid-tile *ngFor="let topic of topics">
-        <app-topic-card [topic]="topic" [isSubscribed]="true"></app-topic-card>
+        <app-topic-card [topic]="topic" [isSubscribed]="true" (refreshObservable)="onRefreshData()"></app-topic-card>
       </mat-grid-tile>
     </mat-grid-list>
 

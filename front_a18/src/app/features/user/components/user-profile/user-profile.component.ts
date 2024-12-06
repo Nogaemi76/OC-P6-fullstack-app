@@ -58,6 +58,7 @@ const materialModules = [
   styleUrl: './user-profile.component.scss',
 })
 export class UserProfileComponent implements OnInit, OnDestroy {
+
   topicSubscriptionArray!: TopicSubscription[];
   topics!: Topic[];
 
@@ -88,25 +89,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
     this.userId = this.userSessionService.user?.id || 0;
 
-    this.userSubscriptions = this.userService.getUserById(this.userId).subscribe({
-      next: (user: User) => {
-        this.user = user;
-
-        this.topicsSubscriptions = this.topicSubscriptionService
-          .getTopicSubscriptionsByUserId(this.user!.id)
-          .subscribe({
-            next: (topic: Topic[]) => {
-              this.topics = topic;
-            },
-            error: (error) => {
-              console.log(error);
-            },
-          });
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+    this.loadData();
   }
 
   ngOnDestroy(): void {
@@ -138,5 +121,31 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         console.log(error);
       }
     });
+  }
+
+  loadData() {
+     this.userSubscriptions = this.userService.getUserById(this.userId).subscribe({
+      next: (user: User) => {
+        this.user = user;
+
+        this.topicsSubscriptions = this.topicSubscriptionService
+          .getTopicSubscriptionsByUserId(this.user!.id)
+          .subscribe({
+            next: (topics: Topic[]) => {
+              this.topics = topics;
+            },
+            error: (error) => {
+              console.log(error);
+            },
+          });
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  onRefreshData() {
+    this.loadData();
   }
 }
