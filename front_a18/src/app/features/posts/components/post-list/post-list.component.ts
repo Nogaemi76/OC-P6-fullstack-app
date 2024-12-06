@@ -54,7 +54,6 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.postsSubscriptions = this.postService.getAllPosts().subscribe({
       next:(posts: Post[]) => {
         this.posts = posts;
-        console.log(this.posts);
       },
       error: error => {
         console.log(error);
