@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { SidenavService } from './services/sidenav.service';
@@ -20,6 +20,7 @@ const materialModules = [
   imports: [
     RouterOutlet,
     RouterLink,
+    RouterLinkActive,
     ...materialModules,
   ],
   templateUrl: './app.component.html',
@@ -29,6 +30,8 @@ export class AppComponent implements OnInit {
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
+  isSidenavOpen = false;
+
   constructor(private sidenavService: SidenavService) {}
 
   ngOnInit(): void {
@@ -37,5 +40,9 @@ export class AppComponent implements OnInit {
         this.sidenav.toggle();
       }
     });
+  }
+
+  closeSidenav() {
+    this.sidenav.close();
   }
 }

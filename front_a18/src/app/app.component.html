@@ -1,17 +1,17 @@
 <mat-sidenav-container class="sidenav-container" autosize>
-  <mat-sidenav mode="over" opened="false" #sidenav position="end">
+  <mat-sidenav mode="over" [(opened)]="isSidenavOpen" #sidenav position="end">
     <div class="sidenav-content">
       <mat-list>
         <mat-list-item>
-          <a mat-button routerLink="posts" routerLink="/posts">Articles</a>
+          <a mat-button routerLink="/posts" routerLinkActive="active-link" (click)="sidenav.close()">Articles</a>
         </mat-list-item>
         <mat-list-item>
-          <a mat-button routerLink="topics" routerLink="/topics">Themes</a>
+          <a mat-button routerLink="/topics" routerLinkActive="active-link" (click)="sidenav.close()">Themes</a>
         </mat-list-item>
       </mat-list>
 
       <div class="button-container">
-        <button mat-mini-fab aria-label="" class="fab-button" routerLink="/user/profile">
+        <button mat-mini-fab aria-label="" class="fab-button" routerLink="/user/profile" routerLinkActive="active-button" (click)="sidenav.close()">
           <mat-icon>person</mat-icon>
         </button>
       </div>
