@@ -39,6 +39,8 @@ export class PostListComponent implements OnInit, OnDestroy {
   posts!: Post[];
   postsSubscriptions!: any;
 
+  isToggled: boolean = false;
+
   constructor(
     private postService: PostService,
     private router: Router,
@@ -66,5 +68,10 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   navigateToPageDetail(id:number) {
     this.router.navigate([`/posts/detail/${id}`]);
+  }
+
+  reverseArray(posts: Post[]): void {
+    this.posts.reverse();
+    this.isToggled = !this.isToggled;
   }
 }

@@ -1,12 +1,14 @@
-<!-- @if (responsiveService.currentScreenSize == 'Medium' || responsiveService.currentScreenSize == 'Large' || responsiveService.currentScreenSize == 'XLarge') {
-  <p>hello</p>
-} -->
 <app-header></app-header>
 
 <div class="post-list-buttons">
   <button mat-flat-button routerLink="/posts/create">Créer un article</button>
-  <button mat-button>Trier par
-    <mat-icon>arrow_downward</mat-icon>
+  <button mat-button (click)="reverseArray(posts)">Trier par
+    @if(isToggled) {
+      <mat-icon>arrow_downward</mat-icon>
+    }
+    @if(!isToggled) {
+      <mat-icon>arrow_upward</mat-icon>
+    }
   </button>
 </div>
 
