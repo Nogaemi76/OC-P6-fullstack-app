@@ -70,6 +70,7 @@ export class RegisterComponent {
 
   submit(): void {
     const registerRequest = this.registerForm.value as RegisterRequest;
+    localStorage.removeItem('token');
 
     this.authService.register(registerRequest).subscribe({
       next: (response: Token) => {
