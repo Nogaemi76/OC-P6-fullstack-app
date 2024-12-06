@@ -20,7 +20,6 @@ import { CommentService } from '../../services/comment.service';
 
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
 
-
 const materialModules = [
   MatButtonModule,
   MatFormFieldModule,
@@ -56,14 +55,10 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   }
 
   comments!: Comment[];
+  commentRequest!: CommentRequest;
 
   postSubscription!: any;
   commentSubscription!: any;
-
-  commentRequest: CommentRequest = {
-    postId: 0,
-    content: ''
-  }
 
   commentForm = new FormGroup({
     content: new FormControl('', [Validators.required, Validators.minLength(30)])
@@ -71,13 +66,11 @@ export class PostDetailComponent implements OnInit, OnDestroy {
 
   @Input()
   set id(postId: number) {
-    console.log(postId);
+    this.postId = postId;
 
     this.postSubscription =  this.postService.getPostById(postId).subscribe({
       next:(post:Post) => {
         this.post = post;
-        console.log('post', post)
-        console.log('this.post', this.post);
       },
       error: error => {
         console.log(error);
@@ -87,8 +80,6 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     this.commentSubscription = this.commentService.getCommentsByPostId(postId).subscribe({
       next:(comments: Comment[]) => {
         this.comments = comments;
-
-        console.log('this.comments', this.comments);
       },
       error: error => {
         console.log(error);
@@ -101,9 +92,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     private commentService: CommentService
   ) {}
 
-
   ngOnInit(): void {
-
   }
 
   ngOnDestroy(): void {
@@ -112,22 +101,25 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   }
 
   submit(): void {
-    console.log(this.post);
-    console.log(this.commentForm.value);
 
     const commentRequest = this.commentForm.value as CommentRequest;
     commentRequest.postId = this.post.id;
 
-    console.log(commentRequest);
-
     this.commentService.createComment(commentRequest).subscribe({
       next: () => {
-        console.log("SUCCESS");
+        this.commentSubscription = this.commentService.getCommentsByPostId(this.postId).subscribe({
+          next:(comments: Comment[]) => {
+            this.comments = comments;
+            this.commentForm.setValue({ content: '' })
+          },
+          error: error => {
+            console.log(error);
+          }
+        });
       },
       error: error => {
         console.log(error);
       }
     });
-
   }
 }
