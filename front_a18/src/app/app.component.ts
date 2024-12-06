@@ -33,7 +33,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.sidenavService.getToggleObservable().subscribe(() => {
-      this.sidenav.toggle();
+      if (this.sidenav) {
+        this.sidenav.toggle();
+      }
     });
   }
 }
