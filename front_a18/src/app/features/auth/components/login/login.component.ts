@@ -49,8 +49,10 @@ const materialModules = [
 })
 export class LoginComponent {
 
+  loginRequest!: LoginRequest
+
   loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required]),
+    nameOrEmail: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.min(8)]),
   });
 
@@ -62,10 +64,36 @@ export class LoginComponent {
   ) { }
 
   submit(): void {
-    const loginRequest = this.loginForm.value as LoginRequest;
-    localStorage.removeItem('token');
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const nameRegex = /^[a-zA-Z0-9]{2,}$/;
 
-    this.authService.login(loginRequest).subscribe({
+    this.loginRequest = {
+      name: '',
+      email: '',
+      password: ''
+    }
+
+    let nameOrEmailValue = this.loginForm.value.nameOrEmail;
+    console.log('nameOrEmailValue', nameOrEmailValue);
+
+    if (nameOrEmailValue && emailRegex.test(nameOrEmailValue)) {
+      console.log(emailRegex.test(nameOrEmailValue))
+      console.log(nameOrEmailValue && emailRegex.test(nameOrEmailValue))
+
+      this.loginRequest.email = nameOrEmailValue;
+    } else if (nameOrEmailValue && nameRegex.test(nameOrEmailValue)) {
+      this.loginRequest.name = nameOrEmailValue;
+    }
+
+    let passwordValue = this.loginForm.value.password;
+    if(passwordValue) {
+      this.loginRequest.password = passwordValue;
+    }
+
+    console.log('this.loginRequest', this.loginRequest);
+
+    localStorage.removeItem('token');
+    this.authService.login(this.loginRequest).subscribe({
       next: (response: Token) => {
         localStorage.setItem('token', response.token);
 
