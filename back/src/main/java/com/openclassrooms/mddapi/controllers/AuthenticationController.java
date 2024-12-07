@@ -3,7 +3,6 @@ package com.openclassrooms.mddapi.controllers;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.openclassrooms.mddapi.dtos.LoginDto;
 import com.openclassrooms.mddapi.dtos.UserDto;
 import com.openclassrooms.mddapi.entities.User;
 import com.openclassrooms.mddapi.responses.TokenResponse;
@@ -52,26 +52,36 @@ public class AuthenticationController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<?> authenticate(@RequestBody UserDto loggedUserDto) {
+	public ResponseEntity<?> authenticate(@RequestBody LoginDto loginDto) {
 
-		User loggedUser = convertToEntity(loggedUserDto);
+		String name = loginDto.getName();
+		String email = loginDto.getEmail();
+		String password = loginDto.getPassword();
 
-		try {
-			User authenticatedUser = authenticationService.authenticate(loggedUser);
+		User loggedUser = new User();
+		loggedUser.setPassword(password);
 
-			String jwtToken = jwtService.generateToken(authenticatedUser);
+		if (email != "") {
+			loggedUser.setEmail(email);
 
-			TokenResponse tokenResponse = new TokenResponse();
-			tokenResponse.setToken(jwtToken);
+		} else if (name != "") {
 
-			return ResponseEntity.ok(tokenResponse);
+			Optional<User> retrievedUser = userService.getUserByName(name);
 
-		} catch (Exception e) {
-
-			String errorMessage = e.getMessage();
-
-			return new ResponseEntity<String>("{\"message\":\"" + errorMessage + "\"}", HttpStatus.UNAUTHORIZED);
+			if (retrievedUser != null) {
+				loggedUser.setEmail(retrievedUser.get().getEmail());
+			}
 		}
+
+		User authenticatedUser = authenticationService.authenticate(loggedUser);
+
+		String jwtToken = jwtService.generateToken(authenticatedUser);
+
+		TokenResponse tokenResponse = new TokenResponse();
+		tokenResponse.setToken(jwtToken);
+
+		return ResponseEntity.ok(tokenResponse);
+
 	}
 
 	@GetMapping("/me")
