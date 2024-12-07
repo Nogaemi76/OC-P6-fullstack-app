@@ -1,5 +1,5 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { Component, Injector, Input, OnDestroy, OnInit, ViewChild, afterNextRender, inject } from '@angular/core';
+import { NgClass, NgFor } from '@angular/common';
 
 import { RouterLink } from '@angular/router';
 
@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+
+import { CdkTextareaAutosize, TextFieldModule } from '@angular/cdk/text-field';
 
 import { Post } from '../../interfaces/post.interface';
 import { PostService } from '../../services/post.service';
@@ -33,16 +35,35 @@ const materialModules = [
   standalone: true,
   imports: [
     NgFor,
+    NgClass,
     RouterLink,
     FormsModule,
     ReactiveFormsModule,
     ...materialModules,
+    TextFieldModule,
     HeaderComponent,
   ],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss'
 })
 export class PostDetailComponent implements OnInit, OnDestroy {
+
+  private _injector = inject(Injector);
+
+  @ViewChild('autosize') autosize: CdkTextareaAutosize | undefined;
+
+  triggerResize() {
+    afterNextRender(
+      () => {
+        if (this.autosize) {
+          this.autosize.resizeToFitContent(true);
+        }
+      },
+      {
+        injector: this._injector,
+      },
+    );
+  }
 
   postId!: number;
   post: Post = {

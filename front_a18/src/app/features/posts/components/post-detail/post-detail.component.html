@@ -4,35 +4,48 @@
   <button class="arrow-button" mat-icon-button routerLink="/posts">
     <mat-icon>arrow_back</mat-icon>
   </button>
-  <div class="post-detail-content">
-    <div class="post-container">
-      <h1>{{ post.title }}</h1>
-      <div>
-        <span>{{ post.created_at }}</span>
-        <span>{{ post.author }}</span>
-        <span>{{ post.topic }}</span>
-      </div>
-      <p>{{ post.content }}</p>
-    </div>
-    <mat-divider></mat-divider>
 
-    <div class="comments-container">
-      <h2>Commentaires</h2>
+  <div class="main-container">
 
-      <div class="flex" *ngFor="let comment of comments">
-        <span>{{ comment.author }}</span>
-        <p>{{ comment.content }}</p>
+    <h1>{{ post.title }}</h1>
+
+    <div>
+
+      <div class="post-wrapper">
+        <div class="post-labels">
+          <span>{{ post.created_at }}</span>
+          <span>{{ post.author }}</span>
+          <span>{{ post.topic }}</span>
+        </div>
+        <p>{{ post.content }}</p>
       </div>
 
-      <form [formGroup]="commentForm" (ngSubmit)="submit()" class="flex">
-        <mat-form-field appearance="outline" class="width-100">
-          <mat-label>Entrez votre commentaire</mat-label>
-          <textarea matInput placeholder="Entrez votre commentaire" formControlName="content"></textarea>
-        </mat-form-field>
-        <button mat-flat-button type="submit" [disabled]="!commentForm.valid">Envoyer</button>
-      </form>
+      <mat-divider></mat-divider>
+
+      <div class="comments-wrapper">
+        <h2>Commentaires</h2>
+        <div class="single-comment" *ngFor="let comment of comments">
+          <span>{{ comment.author }}</span>
+          <div class="comment-content">
+            <p>{{ comment.content }}</p>
+          </div>
+        </div>
+      </div>
 
     </div>
+
+    <form [formGroup]="commentForm" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Entrez votre commentaire</mat-label>
+        <textarea matInput placeholder="Écrivez ici votre commentaire" formControlName="content" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+
+            cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="10"></textarea>
+      </mat-form-field>
+      <button mat-fab type="submit" [disabled]="!commentForm.valid">
+        <mat-icon [ngClass]="{'color-primary' : commentForm.valid }">send</mat-icon>
+      </button>
+    </form>
+
   </div>
 </div>
-
