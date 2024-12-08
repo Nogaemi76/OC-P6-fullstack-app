@@ -4,9 +4,7 @@ This project was generated with Spring Boot 3.3.4,
 Java 17, Maven as dependency manager & Jar for packaging
 with [Spring Initializr](https://github.com/spring-io/initializr/)
 
-<img src="https://img.shields.io/badge/Language%20-%20Java%20-%20%23DB3431?logo=java&logoColor=%23fff"> <img src="https://img.shields.io/badge/Language%20-%20TypeScript%20-%20%233178C6?logoColor=%23fff">
-
-<img src="https://img.shields.io/badge/Spring%20-%20%236CB52D?logo=spring&logoColor=%23fff"><img src="https://img.shields.io/badge/Angular%20-%20%23800BF2?logo=angular&logoColor=%23fff"><img src="https://img.shields.io/badge/MySQL%20-%20%233E6E93?logo=angular&logoColor=%23fff">
+<img src="https://img.shields.io/badge/Language%20-%20Java%20-%20%23DB3431?logo=java&logoColor=%23fff"> <img src="https://img.shields.io/badge/Language%20-%20TypeScript%20-%20%233178C6?logoColor=%23fff"> <img src="https://img.shields.io/badge/Spring%20-%20%236CB52D?logo=spring&logoColor=%23fff"> <img src="https://img.shields.io/badge/Angular%20-%20%23800BF2?logo=angular&logoColor=%23fff"> <img src="https://img.shields.io/badge/MySQL%20-%20%233E6E93?logo=angular&logoColor=%23fff">
 
 ## Dependencies
 
