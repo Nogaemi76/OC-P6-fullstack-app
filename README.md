@@ -1,25 +1,127 @@
 # P6-Full-Stack-reseau-dev
 
-## Front
+This project was generated with Spring Boot 3.3.4, 
+Java 17, Maven as dependency manager & Jar for packaging
+with [Spring Initializr](https://github.com/spring-io/initializr/)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+<img src="https://img.shields.io/badge/Language-Java-orange.svg">
+<img src="https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white">
+<img src="https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white">
 
-Don't forget to install your node_modules before starting (`npm install`).
+<img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white">
+<img src="https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white">
 
-### Development server
+## Dependencies
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Back
 
-### Build
+**Spring Web**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Build web, including RESTful, applications using Spring MVC. Uses Apache Tomcat as the default embedded container.
 
-### Where to start
+**Lombok**
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
+Java annotation library which helps to reduce boilerplate code.
 
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
+**Spring Data JPA**
 
-Note: I recommend to use material however it's not mandatory, if you prefer you can get ride of it.
+Persist data in SQL stores with Java Persistence API using Spring Data and Hibernate.
 
-Good luck!
+**MySQL Driver**
+
+MySQL JDBC driver
+
+**Spring Security 6**
+
+Highly customizable authentication and access-control framework for Spring applications.
+
+**JJWT**
+
+Java library for creating and verifying JSON Web Tokens.
+
+**ModelMapper** 
+
+Java library for automating the mapping of objects to each other.
+
+**springdoc-openapi** 
+
+Library for automatically generating OpenAPI documentation and integrating Swagger UI for Spring Boot projects
+
+### Front
+
+**Angular 18**
+
+Development platform, built on TypeScript. As a platform, Angular includes: A component-based framework for building scalable web applications. A collection of well-integrated libraries that cover a wide variety of features, including routing, forms management, client-server communication, and more.
+
+**Angular Material 18**
+
+UI component infrastructure and Material Design components for mobile and desktop Angular web applications.
+
+## Installation
+
+Clone project from GitHub repository
+> `git clone` https://github.com/Nogaemi76/OC-P6-fullstack-app.git
+
+### Back
+
+Go inside folder
+> `cd back`
+
+ To install the dependencies
+> Run `mvn install`
+
+To launch the project
+
+Inside the project folder **src/main/java**, 
+in the package **com.openclassrooms.mddapi**,
+> Right-click on **MddApiApplication.java**
+ 
+> Select **Run As** > **Java Application**
+
+### Front
+
+Go inside folder
+> `cd front_a18`
+
+To install the node_modules
+> Run `npm install`
+
+To launch the project
+
+**Development server**
+> Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. 
+The application will automatically reload if you change any of the source files.
+
+**Build**
+
+> Run `ng build` to build the project.
+The build artifacts will be stored in the `dist/` directory.
+
+---
+### MySQL
+Server version: 8.0.X
+>**Open the terminal** and **log into MySQL**
+
+> ```CREATE DATABASE database_name;```
+
+> ```USE database_name;```
+
+> Open **script.sql** file in **folder src/main/resources/static**
+> and copy content in terminal
+
+At the project's root,
+create file **env.properties** with following properties
+>DB_DATABASE=
+
+>DB_USER=
+
+>DB_PASSWORD=
+
+>SECURITY_JWT_SECRET_KEY=
+
+>SECURITY_JWT_EXPIRATION_TIME=3600000 (for example)
+
+---
+## Swagger
+Link to Swagger documentation
+>  http://localhost:3001/swagger-ui/index.html
